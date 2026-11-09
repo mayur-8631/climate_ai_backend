@@ -20,6 +20,13 @@ venv/
 .coverage
 htmlcov/
 
+# Node / Frontend
+node_modules/
+.next/
+frontend/node_modules/
+frontend/.next/
+*.log
+
 # IDE / Editor
 .vscode/
 .idea/

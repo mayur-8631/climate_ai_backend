@@ -1,0 +1,130 @@
+@import "tailwindcss";
+@source "../**/*.{ts,tsx}";
+@source "../../src/**/*.{ts,tsx}";
+@source "../../*.{ts,tsx}";
+
+:root {
+  --bg-primary: #071827;
+  --bg-secondary: #102638;
+  --bg-card: #0c2033;
+  --bg-card-hover: #132a43;
+  --border-subtle: #1a3954;
+  --border-focus: #22d3ee;
+  --accent-emerald: #10b981;
+  --accent-cyan: #22d3ee;
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+  
+  --risk-low: #10b981;
+  --risk-mod: #f59e0b;
+  --risk-high: #f97316;
+  --risk-crit: #ef4444;
+}
+
+html.light-mode {
+  --bg-primary: #f1f5f9;
+  --bg-secondary: #e2e8f0;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --border-subtle: #cbd5e1;
+  --border-focus: #0891b2;
+  --accent-emerald: #059669;
+  --accent-cyan: #0891b2;
+  --text-primary: #0f172a;
+  --text-muted: #475569;
+  --text-subtle: #64748b;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Custom Scrollbar for dashboards */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #071827;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e3a52;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22d3ee;
+}
+
+/* Glassmorphism card utilities */
+.glass-panel {
+  background: linear-gradient(135deg, rgba(16, 38, 56, 0.85) 0%, rgba(7, 24, 39, 0.95) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(34, 211, 238, 0.12);
+}
+
+.glass-panel-glow {
+  background: linear-gradient(135deg, rgba(16, 38, 56, 0.9) 0%, rgba(7, 24, 39, 0.95) 100%);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 24px -1px rgba(16, 185, 129, 0.08);
+}
+
+.glass-panel-cyan {
+  background: linear-gradient(135deg, rgba(16, 38, 56, 0.9) 0%, rgba(7, 24, 39, 0.95) 100%);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(34, 211, 238, 0.22);
+  box-shadow: 0 4px 24px -1px rgba(34, 211, 238, 0.08);
+}
+
+/* Pulse animation for live indicators */
+@keyframes softPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-slow {
+  animation: softPulse 2.8s infinite ease-in-out;
+}
+
+/* Leaflet dark theme customization */
+.leaflet-container {
+  background-color: #071827 !important;
+  font-family: inherit !important;
+  border-radius: 0.75rem;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #0d2338 !important;
+  color: #f8fafc !important;
+  border: 1px solid #1e3a52 !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-popup-tip {
+  background: #0d2338 !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: #102638 !important;
+  color: #22d3ee !important;
+  border-color: #1e3a52 !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #163650 !important;
+}

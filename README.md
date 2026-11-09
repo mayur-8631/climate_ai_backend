@@ -138,3 +138,35 @@ python -m ml_engine.demo_workflow
 # 4. Start the FastAPI server
 python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
+
+---
+
+## 💻 Frontend Application (Next.js 16 + React 19)
+
+**Lead:** Pravin Kamble — Frontend & Visualization Lead
+
+The repository includes a modern, responsive climate-intelligence frontend built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS, React Leaflet, and Recharts.
+
+### Frontend Structure
+```
+frontend/
+├── src/
+│   ├── app/
+│   │   ├── page.tsx               # Landing Page & Architecture Overview
+│   │   ├── dashboard/page.tsx     # Main Multi-Hazard Risk Dashboard
+│   │   ├── map/page.tsx           # Interactive React Leaflet GIS Map
+│   │   ├── simulation/page.tsx    # What-If Climate Scenario Simulation
+│   │   ├── recommendations/page.tsx # Stakeholder Action Playbooks
+│   │   └── about/page.tsx         # Team PrithviNex & Challenge Vision
+│   ├── components/                # Modular Dashboard, Maps, Charts & UI components
+│   ├── services/api.ts            # Axios API Service Layer (/api/v1/...)
+│   └── context/                   # Global Location & Theme Context
+```
+
+### Running the Frontend
+```bash
+cd frontend
+npm install --legacy-peer-deps
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view the application.
