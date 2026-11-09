@@ -152,3 +152,33 @@ def test_simulation_contract(mock_aqi, mock_weather, client: TestClient, sample_
     assert "disclaimer" in data
     assert "SCENARIO ESTIMATE" in data["disclaimer"]
 
+
+def test_ml_intelligence_engine_endpoint(client: TestClient):
+    payload = {
+        "environmental_data": {
+            "location": "Pune",
+            "timestamp": "2026-07-18T12:00:00",
+            "temperature_c": 31.0,
+            "temp_max_c": 35.2,
+            "temp_min_c": 23.0,
+            "humidity_pct": 78.0,
+            "wind_speed_kmh": 12.0,
+            "rainfall_mm": 64.0,
+            "rainfall_intensity_mm_hr": 19.0,
+            "soil_moisture": 0.72,
+            "pm25_ugm3": 42.0,
+            "pm10_ugm3": 88.0,
+        },
+        "scenario": {
+            "rainfall_change_percent": 30
+        }
+    }
+    res = client.post("/api/v1/predict/intelligence", json=payload)
+    assert res.status_code == 200
+    data = res.json()
+    assert data["location"] == "Pune"
+    assert "climate_risk_score" in data
+    assert "explainability" in data
+    assert "what_if" in data
+    assert data["what_if"]["scenario"] == {"rainfall_change_percent": 30}
+

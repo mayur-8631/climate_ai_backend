@@ -1,0 +1,70 @@
+{
+  "hazard": "air_quality",
+  "version": "1.0.0",
+  "selected_model_name": "gradient_boosting_xgb_equivalent",
+  "feature_names": [
+    "pm25_ugm3",
+    "pm10_ugm3",
+    "no2_ugm3",
+    "so2_ugm3",
+    "co_mgm3",
+    "o3_ugm3",
+    "pm_ratio_25_to_10",
+    "pm25_lag_1d",
+    "pm25_rolling_3d_mean",
+    "temperature_c",
+    "humidity_pct",
+    "wind_speed_kmh",
+    "wind_stagnation_index",
+    "cpcb_calculated_aqi",
+    "pollutant_load_index",
+    "is_winter_inversion",
+    "is_monsoon_season"
+  ],
+  "candidate_metrics": {
+    "ridge_baseline": {
+      "validation": {
+        "MAE": 0.5463,
+        "MSE": 0.5262,
+        "RMSE": 0.7254,
+        "R2": 0.9979
+      },
+      "test": {
+        "MAE": 0.6677,
+        "MSE": 0.7984,
+        "RMSE": 0.8935,
+        "R2": 0.9936
+      }
+    },
+    "random_forest": {
+      "validation": {
+        "MAE": 0.2736,
+        "MSE": 0.1547,
+        "RMSE": 0.3933,
+        "R2": 0.9994
+      },
+      "test": {
+        "MAE": 0.2558,
+        "MSE": 0.1457,
+        "RMSE": 0.3817,
+        "R2": 0.9988
+      }
+    },
+    "gradient_boosting_xgb_equivalent": {
+      "validation": {
+        "MAE": 0.1602,
+        "MSE": 0.0514,
+        "RMSE": 0.2267,
+        "R2": 0.9998
+      },
+      "test": {
+        "MAE": 0.1564,
+        "MSE": 0.0545,
+        "RMSE": 0.2335,
+        "R2": 0.9996
+      }
+    }
+  },
+  "aqi_standard": "Central Pollution Control Board (CPCB) India National Air Quality Index (NAQI)",
+  "target_definition": "0-100 Air Quality Hazard Score calibrated to CPCB NAQI sub-indices and dispersion stagnation."
+}

@@ -1,0 +1,71 @@
+{
+  "hazard": "heat",
+  "version": "1.0.0",
+  "selected_model_name": "gradient_boosting_xgb_equivalent",
+  "feature_names": [
+    "temperature_c",
+    "temp_max_c",
+    "temp_min_c",
+    "humidity_pct",
+    "wind_speed_kmh",
+    "diurnal_temp_range_c",
+    "heat_index_c",
+    "wet_bulb_temp_c",
+    "vapor_pressure_deficit_kpa",
+    "temp_anomaly_c",
+    "temp_max_anomaly_c",
+    "temp_lag_1d",
+    "temp_rolling_3d_mean",
+    "temp_rolling_7d_mean",
+    "temp_max_rolling_3d_mean",
+    "sin_day_of_year",
+    "cos_day_of_year",
+    "is_summer_season"
+  ],
+  "candidate_metrics": {
+    "ridge_baseline": {
+      "validation": {
+        "MAE": 1.3029,
+        "MSE": 3.3409,
+        "RMSE": 1.8278,
+        "R2": 0.9894
+      },
+      "test": {
+        "MAE": 1.569,
+        "MSE": 4.979,
+        "RMSE": 2.2314,
+        "R2": 0.9905
+      }
+    },
+    "random_forest": {
+      "validation": {
+        "MAE": 1.9871,
+        "MSE": 6.7589,
+        "RMSE": 2.5998,
+        "R2": 0.9785
+      },
+      "test": {
+        "MAE": 1.753,
+        "MSE": 4.8746,
+        "RMSE": 2.2078,
+        "R2": 0.9907
+      }
+    },
+    "gradient_boosting_xgb_equivalent": {
+      "validation": {
+        "MAE": 1.3319,
+        "MSE": 3.0601,
+        "RMSE": 1.7493,
+        "R2": 0.9903
+      },
+      "test": {
+        "MAE": 1.151,
+        "MSE": 2.1952,
+        "RMSE": 1.4816,
+        "R2": 0.9958
+      }
+    }
+  },
+  "target_definition": "Meteorological Heat Hazard Proxy (0-100) based on NOAA Heat Index, Wet-Bulb Temperature, and IMD thermal anomalies.",
+  "scientific_disclaimer": "Environmental heat hazard estimate only; not a medically validated heat-illness or mortality forecast."
+}

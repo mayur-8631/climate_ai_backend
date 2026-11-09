@@ -1,0 +1,72 @@
+{
+  "hazard": "water_stress",
+  "version": "1.0.0",
+  "selected_model_name": "gradient_boosting_xgb_equivalent",
+  "feature_names": [
+    "rainfall_mm",
+    "rainfall_rolling_7d_sum",
+    "rainfall_rolling_14d_sum",
+    "rainfall_rolling_30d_sum",
+    "temperature_c",
+    "temp_max_c",
+    "humidity_pct",
+    "vapor_pressure_deficit_kpa",
+    "soil_moisture",
+    "soil_moisture_lag_1d",
+    "soil_moisture_rolling_7d_mean",
+    "evapotranspiration_mm",
+    "evap_rolling_7d_sum",
+    "evap_rolling_30d_sum",
+    "hydro_water_deficit_7d_mm",
+    "hydro_water_deficit_30d_mm",
+    "aridity_stress_index",
+    "is_summer_season",
+    "is_monsoon_season"
+  ],
+  "candidate_metrics": {
+    "ridge_baseline": {
+      "validation": {
+        "MAE": 4.006,
+        "MSE": 35.7735,
+        "RMSE": 5.9811,
+        "R2": 0.9734
+      },
+      "test": {
+        "MAE": 3.3549,
+        "MSE": 25.683,
+        "RMSE": 5.0678,
+        "R2": 0.9856
+      }
+    },
+    "random_forest": {
+      "validation": {
+        "MAE": 0.9049,
+        "MSE": 7.8094,
+        "RMSE": 2.7945,
+        "R2": 0.9942
+      },
+      "test": {
+        "MAE": 0.5946,
+        "MSE": 4.6699,
+        "RMSE": 2.161,
+        "R2": 0.9974
+      }
+    },
+    "gradient_boosting_xgb_equivalent": {
+      "validation": {
+        "MAE": 0.8051,
+        "MSE": 5.5235,
+        "RMSE": 2.3502,
+        "R2": 0.9959
+      },
+      "test": {
+        "MAE": 0.4533,
+        "MSE": 3.4411,
+        "RMSE": 1.855,
+        "R2": 0.9981
+      }
+    }
+  },
+  "target_definition": "Environmental Hydro-Climatic Water-Stress Proxy (0-100) based on 30d ET-rainfall deficit and soil moisture depletion.",
+  "scientific_disclaimer": "Measures environmental moisture stress; does not measure municipal reservoir storage, groundwater depth, or piped water supply shortage."
+}

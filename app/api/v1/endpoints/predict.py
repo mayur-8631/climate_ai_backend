@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Any, Dict, Optional
 from fastapi import APIRouter, HTTPException, Query, Body
 from app.schemas.prediction import PredictionRequest, PredictionResponse
 from app.services.ingestion.open_meteo import OpenMeteoClient
@@ -6,6 +6,7 @@ from app.services.preprocessing.cleaner import DataCleaner
 from app.services.preprocessing.feature_pipeline import FeaturePipeline
 from app.services.ml_bridge.model_registry import registry
 from app.api.v1.endpoints.weather import resolve_coordinates
+from ml_engine.predict import generate_complete_prediction
 
 router = APIRouter()
 open_meteo_client = OpenMeteoClient()
@@ -52,4 +53,22 @@ async def run_hazard_predictions(
     )
 
     return predictions
+
+
+@router.post("/intelligence", response_model=Dict[str, Any])
+async def run_complete_ml_intelligence(
+    environmental_data: Dict[str, Any] = Body(...),
+    scenario: Optional[Dict[str, Any]] = Body(default=None),
+):
+    """
+    Execute Lokesh Joshi's unified ClimateTwin AI Intelligence Engine (`ml_engine.predict.generate_complete_prediction`),
+    returning multi-hazard predictions, localized Climate Risk Score (0-100), XAI attributions,
+    What-If counterfactual simulation, and stakeholder recommendations.
+    """
+    try:
+        return generate_complete_prediction(environmental_data, scenario=scenario)
+    except ValueError as err:
+        raise HTTPException(status_code=422, detail=str(err))
+    except Exception as err:
+        raise HTTPException(status_code=500, detail=f"ML Intelligence Engine error: {str(err)}")
 

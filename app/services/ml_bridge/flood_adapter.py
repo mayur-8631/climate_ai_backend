@@ -20,12 +20,15 @@ class FloodHazardModel:
                 }])
                 pred = float(self.model_artifact.predict(df_vec)[0])
                 score = max(0.0, min(100.0, round(pred, 1)))
+                imps = getattr(self.model_artifact, "feature_importances_", [0.30, 0.60, 0.10])
+                cols = list(df_vec.columns)
+                dynamic_contribs = {cols[i]: round(float(imps[i]), 4) for i in range(len(cols))}
                 return HazardDetail(
                     score=score,
                     status="AVAILABLE",
-                    confidence=0.90,
+                    confidence=0.91,
                     primary_driver=self._determine_driver(features),
-                    feature_contributions={"precip_24h": 0.65, "current_rate": 0.25, "seasonality": 0.10}
+                    feature_contributions=dynamic_contribs
                 )
             except Exception:
                 pass

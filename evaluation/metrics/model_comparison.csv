@@ -1,0 +1,13 @@
+hazard,candidate_model,is_selected,val_MAE,val_RMSE,val_R2,test_MAE,test_RMSE,test_R2
+heat,ridge_baseline,False,1.3029,1.8278,0.9894,1.569,2.2314,0.9905
+heat,random_forest,False,1.9871,2.5998,0.9785,1.753,2.2078,0.9907
+heat,gradient_boosting_xgb_equivalent,True,1.3319,1.7493,0.9903,1.151,1.4816,0.9958
+flood,ridge_baseline,False,1.1472,1.9599,0.9906,1.1936,2.08,0.9878
+flood,random_forest,False,0.7912,1.7824,0.9922,0.6727,1.3691,0.9947
+flood,gradient_boosting_xgb_equivalent,True,0.5694,1.199,0.9965,0.4585,0.867,0.9979
+air_quality,ridge_baseline,False,0.5463,0.7254,0.9979,0.6677,0.8935,0.9936
+air_quality,random_forest,False,0.2736,0.3933,0.9994,0.2558,0.3817,0.9988
+air_quality,gradient_boosting_xgb_equivalent,True,0.1602,0.2267,0.9998,0.1564,0.2335,0.9996
+water_stress,ridge_baseline,False,4.006,5.9811,0.9734,3.3549,5.0678,0.9856
+water_stress,random_forest,False,0.9049,2.7945,0.9942,0.5946,2.161,0.9974
+water_stress,gradient_boosting_xgb_equivalent,True,0.8051,2.3502,0.9959,0.4533,1.855,0.9981

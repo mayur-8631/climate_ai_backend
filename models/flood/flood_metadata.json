@@ -1,0 +1,77 @@
+{
+  "hazard": "flood",
+  "version": "1.0.0",
+  "selected_model_name": "gradient_boosting_xgb_equivalent",
+  "feature_names": [
+    "rainfall_mm",
+    "rainfall_intensity_mm_hr",
+    "rainfall_lag_1d",
+    "rainfall_lag_3d",
+    "rainfall_rolling_3d_sum",
+    "rainfall_rolling_7d_sum",
+    "rainfall_rolling_14d_sum",
+    "rainfall_anomaly_mm",
+    "rainfall_intensity_ratio",
+    "soil_moisture",
+    "humidity_pct",
+    "pressure_hpa",
+    "elevation_m",
+    "slope_deg",
+    "drainage_index",
+    "runoff_potential_index",
+    "topographic_flood_susceptibility",
+    "is_monsoon_season"
+  ],
+  "candidate_metrics": {
+    "ridge_baseline": {
+      "validation": {
+        "MAE": 1.1472,
+        "MSE": 3.8411,
+        "RMSE": 1.9599,
+        "R2": 0.9906
+      },
+      "test": {
+        "MAE": 1.1936,
+        "MSE": 4.3262,
+        "RMSE": 2.08,
+        "R2": 0.9878
+      }
+    },
+    "random_forest": {
+      "validation": {
+        "MAE": 0.7912,
+        "MSE": 3.177,
+        "RMSE": 1.7824,
+        "R2": 0.9922
+      },
+      "test": {
+        "MAE": 0.6727,
+        "MSE": 1.8743,
+        "RMSE": 1.3691,
+        "R2": 0.9947
+      }
+    },
+    "gradient_boosting_xgb_equivalent": {
+      "validation": {
+        "MAE": 0.5694,
+        "MSE": 1.4376,
+        "RMSE": 1.199,
+        "R2": 0.9965
+      },
+      "test": {
+        "MAE": 0.4585,
+        "MSE": 0.7518,
+        "RMSE": 0.867,
+        "R2": 0.9979
+      }
+    }
+  },
+  "rainfall_forecast_metrics": {
+    "MAE": 12.2255,
+    "MSE": 691.107,
+    "RMSE": 26.2889,
+    "R2": 0.1167
+  },
+  "target_definition": "Hydrometeorological Rainfall-Runoff Flood-Hazard Proxy (0-100).",
+  "scientific_disclaimer": "High rainfall alone does not equal confirmed street flooding. This model estimates hydrometeorological rainfall-runoff hazard proxy combining cumulative rainfall, peak intensity, soil saturation, and drainage."
+}

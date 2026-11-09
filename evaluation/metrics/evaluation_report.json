@@ -1,0 +1,492 @@
+{
+  "dataset_summary": {
+    "total_records": 1765,
+    "train_records": 1235,
+    "validation_records": 265,
+    "test_records": 265,
+    "split_method": "strict_chronological_temporal_split",
+    "preprocessor_fitted_on": "train_split_only",
+    "data_coverage_pct": 100.0,
+    "derived_features_count": 41
+  },
+  "hazards": {
+    "heat": {
+      "selected_model": "gradient_boosting_xgb_equivalent",
+      "feature_count": 18,
+      "train_regression_metrics": {
+        "MAE": 0.3271,
+        "MSE": 0.1638,
+        "RMSE": 0.4048,
+        "R2": 0.9997
+      },
+      "validation_regression_metrics": {
+        "MAE": 1.3319,
+        "MSE": 3.0601,
+        "RMSE": 1.7493,
+        "R2": 0.9903
+      },
+      "test_regression_metrics": {
+        "MAE": 1.151,
+        "MSE": 2.1952,
+        "RMSE": 1.4816,
+        "R2": 0.9958
+      },
+      "test_classification_metrics": {
+        "Accuracy": 0.9698,
+        "Precision_Weighted": 0.9703,
+        "Recall_Weighted": 0.9698,
+        "F1_Weighted": 0.9698,
+        "ROC_AUC": 0.9982,
+        "Confusion_Matrix_Labels": [
+          "Very Low",
+          "Low",
+          "Moderate",
+          "High",
+          "Very High"
+        ],
+        "Confusion_Matrix": [
+          [
+            39,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            77,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            79,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            40,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            22
+          ]
+        ]
+      },
+      "candidate_metrics": {
+        "ridge_baseline": {
+          "validation": {
+            "MAE": 1.3029,
+            "MSE": 3.3409,
+            "RMSE": 1.8278,
+            "R2": 0.9894
+          },
+          "test": {
+            "MAE": 1.569,
+            "MSE": 4.979,
+            "RMSE": 2.2314,
+            "R2": 0.9905
+          }
+        },
+        "random_forest": {
+          "validation": {
+            "MAE": 1.9871,
+            "MSE": 6.7589,
+            "RMSE": 2.5998,
+            "R2": 0.9785
+          },
+          "test": {
+            "MAE": 1.753,
+            "MSE": 4.8746,
+            "RMSE": 2.2078,
+            "R2": 0.9907
+          }
+        },
+        "gradient_boosting_xgb_equivalent": {
+          "validation": {
+            "MAE": 1.3319,
+            "MSE": 3.0601,
+            "RMSE": 1.7493,
+            "R2": 0.9903
+          },
+          "test": {
+            "MAE": 1.151,
+            "MSE": 2.1952,
+            "RMSE": 1.4816,
+            "R2": 0.9958
+          }
+        }
+      },
+      "limitations": "Trained on meteorological heat hazard proxy (NOAA Heat Index + Wet-Bulb + IMD thermal anomaly). Does not incorporate indoor building thermal insulation, urban canyon micro-scale radiative trapping, or clinical hospital heat-stroke admission records."
+    },
+    "flood": {
+      "selected_model": "gradient_boosting_xgb_equivalent",
+      "feature_count": 18,
+      "train_regression_metrics": {
+        "MAE": 0.0401,
+        "MSE": 0.0047,
+        "RMSE": 0.0682,
+        "R2": 1.0
+      },
+      "validation_regression_metrics": {
+        "MAE": 0.5694,
+        "MSE": 1.4376,
+        "RMSE": 1.199,
+        "R2": 0.9965
+      },
+      "test_regression_metrics": {
+        "MAE": 0.4585,
+        "MSE": 0.7518,
+        "RMSE": 0.867,
+        "R2": 0.9979
+      },
+      "test_classification_metrics": {
+        "Accuracy": 0.9925,
+        "Precision_Weighted": 0.9925,
+        "Recall_Weighted": 0.9925,
+        "F1_Weighted": 0.9925,
+        "ROC_AUC": 1.0,
+        "Confusion_Matrix_Labels": [
+          "Very Low",
+          "Low",
+          "Moderate",
+          "High",
+          "Very High"
+        ],
+        "Confusion_Matrix": [
+          [
+            201,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            40,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            14,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            5
+          ]
+        ]
+      },
+      "candidate_metrics": {
+        "ridge_baseline": {
+          "validation": {
+            "MAE": 1.1472,
+            "MSE": 3.8411,
+            "RMSE": 1.9599,
+            "R2": 0.9906
+          },
+          "test": {
+            "MAE": 1.1936,
+            "MSE": 4.3262,
+            "RMSE": 2.08,
+            "R2": 0.9878
+          }
+        },
+        "random_forest": {
+          "validation": {
+            "MAE": 0.7912,
+            "MSE": 3.177,
+            "RMSE": 1.7824,
+            "R2": 0.9922
+          },
+          "test": {
+            "MAE": 0.6727,
+            "MSE": 1.8743,
+            "RMSE": 1.3691,
+            "R2": 0.9947
+          }
+        },
+        "gradient_boosting_xgb_equivalent": {
+          "validation": {
+            "MAE": 0.5694,
+            "MSE": 1.4376,
+            "RMSE": 1.199,
+            "R2": 0.9965
+          },
+          "test": {
+            "MAE": 0.4585,
+            "MSE": 0.7518,
+            "RMSE": 0.867,
+            "R2": 0.9979
+          }
+        }
+      },
+      "limitations": "Implements a Hydrometeorological Rainfall-Runoff Flood-Hazard Proxy. High rainfall alone does not confirm street-level inundation; does not model real-time dam reservoir releases (e.g., Khadakwasla discharge) or localized municipal stormwater drain blockages."
+    },
+    "air_quality": {
+      "selected_model": "gradient_boosting_xgb_equivalent",
+      "feature_count": 17,
+      "train_regression_metrics": {
+        "MAE": 0.0483,
+        "MSE": 0.0038,
+        "RMSE": 0.0613,
+        "R2": 1.0
+      },
+      "validation_regression_metrics": {
+        "MAE": 0.1602,
+        "MSE": 0.0514,
+        "RMSE": 0.2267,
+        "R2": 0.9998
+      },
+      "test_regression_metrics": {
+        "MAE": 0.1564,
+        "MSE": 0.0545,
+        "RMSE": 0.2335,
+        "R2": 0.9996
+      },
+      "test_classification_metrics": {
+        "Accuracy": 0.9962,
+        "Precision_Weighted": 0.9963,
+        "Recall_Weighted": 0.9962,
+        "F1_Weighted": 0.9962,
+        "ROC_AUC": 1.0,
+        "Confusion_Matrix_Labels": [
+          "Very Low",
+          "Low",
+          "Moderate",
+          "High",
+          "Very High"
+        ],
+        "Confusion_Matrix": [
+          [
+            98,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            138,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            27,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "candidate_metrics": {
+        "ridge_baseline": {
+          "validation": {
+            "MAE": 0.5463,
+            "MSE": 0.5262,
+            "RMSE": 0.7254,
+            "R2": 0.9979
+          },
+          "test": {
+            "MAE": 0.6677,
+            "MSE": 0.7984,
+            "RMSE": 0.8935,
+            "R2": 0.9936
+          }
+        },
+        "random_forest": {
+          "validation": {
+            "MAE": 0.2736,
+            "MSE": 0.1547,
+            "RMSE": 0.3933,
+            "R2": 0.9994
+          },
+          "test": {
+            "MAE": 0.2558,
+            "MSE": 0.1457,
+            "RMSE": 0.3817,
+            "R2": 0.9988
+          }
+        },
+        "gradient_boosting_xgb_equivalent": {
+          "validation": {
+            "MAE": 0.1602,
+            "MSE": 0.0514,
+            "RMSE": 0.2267,
+            "R2": 0.9998
+          },
+          "test": {
+            "MAE": 0.1564,
+            "MSE": 0.0545,
+            "RMSE": 0.2335,
+            "R2": 0.9996
+          }
+        }
+      },
+      "limitations": "Calibrated to official Indian CPCB NAQI sub-indices. Does not account for sudden episodic point-source emissions (e.g., localized crop burning plumes, traffic accidents, or festival firecracker spikes) unless reflected in incoming pollutant sensor readings."
+    },
+    "water_stress": {
+      "selected_model": "gradient_boosting_xgb_equivalent",
+      "feature_count": 19,
+      "train_regression_metrics": {
+        "MAE": 0.1103,
+        "MSE": 0.0211,
+        "RMSE": 0.1453,
+        "R2": 1.0
+      },
+      "validation_regression_metrics": {
+        "MAE": 0.8051,
+        "MSE": 5.5235,
+        "RMSE": 2.3502,
+        "R2": 0.9959
+      },
+      "test_regression_metrics": {
+        "MAE": 0.4533,
+        "MSE": 3.4411,
+        "RMSE": 1.855,
+        "R2": 0.9981
+      },
+      "test_classification_metrics": {
+        "Accuracy": 0.9925,
+        "Precision_Weighted": 0.9943,
+        "Recall_Weighted": 0.9925,
+        "F1_Weighted": 0.9929,
+        "ROC_AUC": 0.9999,
+        "Confusion_Matrix_Labels": [
+          "Very Low",
+          "Low",
+          "Moderate",
+          "High",
+          "Very High"
+        ],
+        "Confusion_Matrix": [
+          [
+            126,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            6,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            16,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            112
+          ]
+        ]
+      },
+      "candidate_metrics": {
+        "ridge_baseline": {
+          "validation": {
+            "MAE": 4.006,
+            "MSE": 35.7735,
+            "RMSE": 5.9811,
+            "R2": 0.9734
+          },
+          "test": {
+            "MAE": 3.3549,
+            "MSE": 25.683,
+            "RMSE": 5.0678,
+            "R2": 0.9856
+          }
+        },
+        "random_forest": {
+          "validation": {
+            "MAE": 0.9049,
+            "MSE": 7.8094,
+            "RMSE": 2.7945,
+            "R2": 0.9942
+          },
+          "test": {
+            "MAE": 0.5946,
+            "MSE": 4.6699,
+            "RMSE": 2.161,
+            "R2": 0.9974
+          }
+        },
+        "gradient_boosting_xgb_equivalent": {
+          "validation": {
+            "MAE": 0.8051,
+            "MSE": 5.5235,
+            "RMSE": 2.3502,
+            "R2": 0.9959
+          },
+          "test": {
+            "MAE": 0.4533,
+            "MSE": 3.4411,
+            "RMSE": 1.855,
+            "R2": 0.9981
+          }
+        }
+      },
+      "limitations": "Quantifies environmental and hydro-climatic moisture deficit (30d ET minus rainfall and soil moisture depletion). Does not measure municipal dam storage volumes, groundwater table drawdowns, or piped water distribution equity."
+    }
+  },
+  "plots_saved": {
+    "model_comparison": "D:\\AIML Stuff\\Indradhanu\\evaluation\\plots\\model_rmse_r2_comparison.png",
+    "actual_vs_predicted": "D:\\AIML Stuff\\Indradhanu\\evaluation\\plots\\actual_vs_predicted_hazards.png",
+    "feature_importances": "D:\\AIML Stuff\\Indradhanu\\evaluation\\plots\\feature_importances_summary.png",
+    "confusion_matrices": "D:\\AIML Stuff\\Indradhanu\\evaluation\\plots\\confusion_matrices.png"
+  }
+}

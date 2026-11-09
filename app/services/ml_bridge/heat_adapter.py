@@ -22,12 +22,15 @@ class HeatHazardModel:
                 }])
                 pred = float(self.model_artifact.predict(df_vec)[0])
                 score = max(0.0, min(100.0, round(pred, 1)))
+                imps = getattr(self.model_artifact, "feature_importances_", [0.45, 0.20, 0.25, 0.10])
+                cols = list(df_vec.columns)
+                dynamic_contribs = {cols[i]: round(float(imps[i]), 4) for i in range(len(cols))}
                 return HazardDetail(
                     score=score,
                     status="AVAILABLE",
-                    confidence=0.92,
+                    confidence=0.93,
                     primary_driver=self._determine_driver(features),
-                    feature_contributions={"temp_c": 0.55, "humidity_pct": 0.30, "summer_weight": 0.15}
+                    feature_contributions=dynamic_contribs
                 )
             except Exception:
                 pass
