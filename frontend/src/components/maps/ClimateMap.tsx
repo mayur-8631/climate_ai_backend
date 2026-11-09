@@ -102,34 +102,41 @@ export function ClimateMap({
         center={centerPosition}
         zoom={6}
         scrollWheelZoom={true}
-        className="w-full h-full z-0"
+        className="w-full h-full z-0 dark-map-tiles"
       >
         <MapController center={centerPosition} />
 
-        {/* Dark CartoDB Matter Tile Layer for sleek climate-tech aesthetics */}
+        {/* Clean OpenStreetMap Tiles with Dark Theme styling (Zero watermark, No API Key required) */}
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url={
+            process.env.NEXT_PUBLIC_CARTO_API_KEY
+              ? `https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?api_key=${process.env.NEXT_PUBLIC_CARTO_API_KEY}`
+              : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          }
           maxZoom={19}
         />
 
         {/* Location Markers and Risk Heat Circles */}
-        {locations.map((loc) => {
+        {locations.map((loc, idx) => {
+          const locKey = loc.id || `loc-pin-${idx}`;
           const isSelected = loc.id === selectedLocation.id;
-          let displayScore = loc.climate_risk_score;
-          if (activeLayer !== 'composite') {
+          let displayScore = loc.climate_risk_score ?? 50;
+          if (activeLayer !== 'composite' && loc.risks && loc.risks[activeLayer] !== undefined) {
             displayScore = loc.risks[activeLayer];
           }
 
           const category = getRiskCategory(displayScore);
           const colorData = getRiskColor(category);
           const icon = createCustomPin(colorData.hex, displayScore, isSelected);
+          const lat = loc.lat ?? 18.5204;
+          const lng = loc.lng ?? 73.8567;
 
           return (
-            <React.Fragment key={loc.id}>
+            <React.Fragment key={locKey}>
               {/* Radius Circle showing localized hazard footprint */}
               <Circle
-                center={[loc.lat, loc.lng]}
+                center={[lat, lng]}
                 radius={isSelected ? 45000 : 25000}
                 pathOptions={{
                   color: colorData.hex,
@@ -142,7 +149,7 @@ export function ClimateMap({
 
               {/* Marker */}
               <Marker
-                position={[loc.lat, loc.lng]}
+                position={[lat, lng]}
                 icon={icon}
                 eventHandlers={{
                   click: () => onSelectLocation(loc),

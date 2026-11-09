@@ -32,10 +32,12 @@ export function LocationSearch({ className = '' }: { className?: string }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const filtered = locationsList.filter((loc) =>
-    loc.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    loc.state.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filtered = locationsList.filter((loc) => {
+    const term = searchTerm.toLowerCase();
+    const name = loc.name?.toLowerCase() ?? '';
+    const state = loc.state?.toLowerCase() ?? '';
+    return name.includes(term) || state.includes(term);
+  });
 
   const handleSelect = (id: string) => {
     selectLocationById(id);

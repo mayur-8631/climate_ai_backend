@@ -15,7 +15,7 @@
   --text-primary: #f8fafc;
   --text-muted: #94a3b8;
   --text-subtle: #64748b;
-  
+
   --risk-low: #10b981;
   --risk-mod: #f59e0b;
   --risk-high: #f97316;
@@ -86,10 +86,13 @@ body {
 
 /* Pulse animation for live indicators */
 @keyframes softPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.6;
     transform: scale(1.08);
@@ -127,4 +130,9 @@ body {
 
 .leaflet-control-zoom a:hover {
   background-color: #163650 !important;
+}
+
+/* Dark mode styling for OpenStreetMap tiles without watermark or API key requirement */
+.dark-map-tiles .leaflet-tile {
+  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
 }

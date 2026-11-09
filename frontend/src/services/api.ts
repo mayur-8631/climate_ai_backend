@@ -94,8 +94,59 @@ class ClimateApiService {
 
     try {
       const res = await this.client.get(`${API_V1}/locations`);
+      if (Array.isArray(res.data) && res.data.length > 0) {
+        // If items already conform to LocationData (have id and name)
+        if (res.data[0].id && res.data[0].name) {
+          return {
+            data: res.data,
+            isMock: false,
+            status: 'success',
+            sourceUrl: `${API_BASE_URL}${API_V1}/locations`,
+            timestamp,
+          };
+        }
+
+        // Map backend LocationDetail format [{ city, state, country, coordinates, wards }]
+        const puneBase = MOCK_LOCATIONS.find((l) => l.id === 'pune') || MOCK_LOCATIONS[0];
+        const wardLocations: LocationData[] = [];
+
+        res.data.forEach((locDetail: any) => {
+          if (Array.isArray(locDetail.wards)) {
+            locDetail.wards.forEach((ward: any) => {
+              const cleanId = (ward.name || ward.ward_code || 'ward')
+                .toLowerCase()
+                .replace(/[^a-z0-9]/g, '-');
+              wardLocations.push({
+                ...puneBase,
+                id: cleanId,
+                name: ward.name,
+                state: locDetail.state || 'Maharashtra',
+                country: locDetail.country || 'India',
+                lat: ward.coordinates?.latitude ?? puneBase.lat,
+                lng: ward.coordinates?.longitude ?? puneBase.lng,
+                status_explanation: ward.description || puneBase.status_explanation,
+              });
+            });
+          }
+        });
+
+        // Combine primary regional nodes (Pune, Mumbai, etc.) with Pune micro-wards
+        const combined = [
+          ...MOCK_LOCATIONS,
+          ...wardLocations.filter((w) => !MOCK_LOCATIONS.some((m) => m.id === w.id)),
+        ];
+
+        return {
+          data: combined,
+          isMock: false,
+          status: 'success',
+          sourceUrl: `${API_BASE_URL}${API_V1}/locations`,
+          timestamp,
+        };
+      }
+
       return {
-        data: res.data && res.data.length > 0 ? res.data : MOCK_LOCATIONS,
+        data: MOCK_LOCATIONS,
         isMock: false,
         status: 'success',
         sourceUrl: `${API_BASE_URL}${API_V1}/locations`,
@@ -134,9 +185,18 @@ class ClimateApiService {
     }
 
     try {
+      const cleanQ = locationQuery.trim();
+      const isWard = ['shivajinagar', 'kothrud', 'hadapsar', 'lohegaon', 'hinjawadi', 'katraj'].some(
+        (w) => cleanQ.toLowerCase().includes(w)
+      );
+
+      const params: Record<string, string> = isWard
+        ? { location: 'Pune', ward: cleanQ }
+        : { location: cleanQ };
+
       const res = await this.client.get<InitialIntegrationContract>(
         `${API_V1}/risk-score`,
-        { params: { location: locationQuery } }
+        { params }
       );
 
       const apiData = res.data;

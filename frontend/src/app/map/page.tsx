@@ -53,19 +53,20 @@ export default function MapPage() {
           {/* Quick Location Pills */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
             <span className="text-[11px] text-slate-400 font-mono mr-1">Focus Node:</span>
-            {locationsList.map((loc) => {
-              const isSelected = loc.id === selectedLocation.id;
+            {locationsList.map((loc, idx) => {
+              const locId = loc.id || (loc as any).ward_code || (loc as any).city?.toLowerCase() || `loc-${idx}`;
+              const locName = loc.name || (loc as any).city || 'Node';
+              const isSelected = locId === selectedLocation.id;
               return (
                 <button
-                  key={loc.id}
-                  onClick={() => selectLocationById(loc.id)}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
-                    isSelected
+                  key={locId}
+                  onClick={() => selectLocationById(locId)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${isSelected
                       ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold'
                       : 'bg-[#0B2033] text-slate-400 hover:text-slate-200 border border-[#1A3954]'
-                  }`}
+                    }`}
                 >
-                  {loc.name}
+                  {locName}
                 </button>
               );
             })}
@@ -81,11 +82,10 @@ export default function MapPage() {
 
           <button
             onClick={() => setActiveLayer('composite')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
-              activeLayer === 'composite'
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${activeLayer === 'composite'
                 ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold'
                 : 'bg-[#081B2B] text-slate-400 hover:text-slate-200 border border-[#1A3954]'
-            }`}
+              }`}
           >
             <Activity className="w-3.5 h-3.5 text-emerald-400" />
             <span>Composite Multi-Hazard</span>
@@ -93,11 +93,10 @@ export default function MapPage() {
 
           <button
             onClick={() => setActiveLayer('heat')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
-              activeLayer === 'heat'
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${activeLayer === 'heat'
                 ? 'bg-orange-500/20 text-orange-300 border border-orange-500/40 font-semibold'
                 : 'bg-[#081B2B] text-slate-400 hover:text-slate-200 border border-[#1A3954]'
-            }`}
+              }`}
           >
             <Flame className="w-3.5 h-3.5 text-orange-400" />
             <span>Heat Island Layer</span>
@@ -105,11 +104,10 @@ export default function MapPage() {
 
           <button
             onClick={() => setActiveLayer('flood')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
-              activeLayer === 'flood'
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${activeLayer === 'flood'
                 ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold'
                 : 'bg-[#081B2B] text-slate-400 hover:text-slate-200 border border-[#1A3954]'
-            }`}
+              }`}
           >
             <CloudRain className="w-3.5 h-3.5 text-cyan-400" />
             <span>Precipitation / Inundation</span>
@@ -117,11 +115,10 @@ export default function MapPage() {
 
           <button
             onClick={() => setActiveLayer('air_quality')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
-              activeLayer === 'air_quality'
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${activeLayer === 'air_quality'
                 ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40 font-semibold'
                 : 'bg-[#081B2B] text-slate-400 hover:text-slate-200 border border-[#1A3954]'
-            }`}
+              }`}
           >
             <Wind className="w-3.5 h-3.5 text-purple-400" />
             <span>AQI Aerosol Inversion</span>
@@ -129,11 +126,10 @@ export default function MapPage() {
 
           <button
             onClick={() => setActiveLayer('water_stress')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
-              activeLayer === 'water_stress'
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${activeLayer === 'water_stress'
                 ? 'bg-blue-500/20 text-blue-300 border border-blue-500/40 font-semibold'
                 : 'bg-[#081B2B] text-slate-400 hover:text-slate-200 border border-[#1A3954]'
-            }`}
+              }`}
           >
             <Droplets className="w-3.5 h-3.5 text-blue-400" />
             <span>Aquifer Depletion Layer</span>
