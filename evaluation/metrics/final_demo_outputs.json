@@ -1,0 +1,1537 @@
+{
+  "case_studies": {
+    "case_a_pune_summer_heatwave": {
+      "description": "Pune Pre-Monsoon Heatwave & Soil Moisture Depletion (May)",
+      "result": {
+        "location": "Pune",
+        "timestamp": "2026-05-14T14:00:00",
+        "data_status": "available",
+        "risks": {
+          "heat": 90.95,
+          "flood": 0.59,
+          "air_quality": 38.28,
+          "water_stress": 95.05
+        },
+        "hazard_details": {
+          "heat": {
+            "heat_risk": 90.95,
+            "risk_level": "Very High",
+            "confidence": 0.93,
+            "contributing_factors": [
+              "heat_index_c",
+              "temp_anomaly_c",
+              "temp_max_anomaly_c",
+              "temp_max_c"
+            ],
+            "model_used": "gradient_boosting_xgb_equivalent",
+            "methodology_note": "Meteorological heat-hazard proxy (0-100) calibrated on NOAA Heat Index, Wet-Bulb temperature, and IMD thermal anomalies."
+          },
+          "flood": {
+            "flood_risk": 0.59,
+            "risk_level": "Very Low",
+            "confidence": 0.95,
+            "contributing_factors": [
+              "runoff_potential_index",
+              "rainfall_mm",
+              "rainfall_anomaly_mm",
+              "soil_moisture"
+            ],
+            "forecast_next_24h_rainfall_mm": 2.48,
+            "is_proxy_hazard": true,
+            "data_availability": {
+              "soil_moisture_measured": true,
+              "elevation_available": true,
+              "historical_flood_polygon_labels_available": false
+            },
+            "limitations": "High rainfall does not automatically mean flooding. Output is a hydrometeorological rainfall-runoff flood-hazard proxy; real-time dam release and street stormwater blockage data are not included.",
+            "model_used": "gradient_boosting_xgb_equivalent"
+          },
+          "air_quality": {
+            "air_quality_risk": 38.28,
+            "risk_level": "Low",
+            "confidence": 0.98,
+            "dominant_pollutants": [
+              "PM10",
+              "PM2.5",
+              "O3"
+            ],
+            "cpcb_calculated_aqi": 124.1,
+            "source_measured_aqi": null,
+            "aqi_source_distinction": "ml_hazard_and_cpcb_subindex_calculated_from_pollutants",
+            "model_used": "gradient_boosting_xgb_equivalent"
+          },
+          "water_stress": {
+            "water_stress_risk": 95.05,
+            "risk_level": "Very High",
+            "confidence": 0.91,
+            "contributing_factors": [
+              "soil_moisture_rolling_7d_mean",
+              "hydro_water_deficit_30d_mm",
+              "rainfall_rolling_14d_sum",
+              "soil_moisture"
+            ],
+            "data_status_notes": [
+              "All primary hydro-climatic inputs available."
+            ],
+            "scope_disclaimer": "Represents environmental/climatic water stress only. Municipal reservoir levels, groundwater depth, and piped water supply are not measured.",
+            "model_used": "gradient_boosting_xgb_equivalent"
+          }
+        },
+        "climate_risk_score": 54.33,
+        "risk_level": "Moderate",
+        "weights": {
+          "heat": 0.25,
+          "flood": 0.3,
+          "air_quality": 0.2,
+          "water_stress": 0.25
+        },
+        "data_coverage": 100.0,
+        "input_feature_coverage_pct": 100.0,
+        "explainability": {
+          "explanation": {
+            "primary_factors": [
+              {
+                "feature": "heat_index_c",
+                "readable_name": "apparent heat index",
+                "value": 47.358,
+                "baseline_mean": 37.463,
+                "effect": "increases_risk",
+                "contribution_points": 29.784,
+                "importance": 0.9338,
+                "hazard_domain": "heat"
+              },
+              {
+                "feature": "soil_moisture_rolling_7d_mean",
+                "readable_name": "soil_moisture_rolling_7d_mean",
+                "value": 0.12,
+                "baseline_mean": 0.281,
+                "effect": "increases_risk",
+                "contribution_points": 25.447,
+                "importance": 0.8781,
+                "hazard_domain": "water_stress"
+              },
+              {
+                "feature": "runoff_potential_index",
+                "readable_name": "surface runoff & drainage index",
+                "value": 2.114,
+                "baseline_mean": 25.745,
+                "effect": "decreases_risk",
+                "contribution_points": -4.762,
+                "importance": 0.3744,
+                "hazard_domain": "flood"
+              },
+              {
+                "feature": "cpcb_calculated_aqi",
+                "readable_name": "CPCB calculated AQI",
+                "value": 124.1,
+                "baseline_mean": 105.152,
+                "effect": "increases_risk",
+                "contribution_points": 3.763,
+                "importance": 0.6016,
+                "hazard_domain": "air_quality"
+              }
+            ],
+            "summary": "Elevated heat hazard (90.9/100 vs baseline 42.3/100) was primarily driven upward by apparent heat index, maximum temperature anomaly, temperature anomaly above monthly normal. Low flood hazard (0.6/100 vs baseline 7.8/100) reflects favorable surface runoff & drainage index, daily rainfall, peak hourly rainfall intensity below climatological stress thresholds. Elevated air_quality hazard (38.3/100 vs baseline 33.7/100) was primarily driven upward by CPCB calculated AQI, PM10 concentration, pollutant_load_index. Elevated water_stress hazard (95.0/100 vs baseline 37.5/100) was primarily driven upward by soil_moisture_rolling_7d_mean, 30-day cumulative water balance deficit, soil moisture saturation.",
+            "by_hazard": {
+              "heat": {
+                "hazard": "heat",
+                "predicted_score": 90.95,
+                "baseline_expected_score": 42.31,
+                "attribution_method": "interventional_model_attribution",
+                "primary_factors": [
+                  {
+                    "feature": "heat_index_c",
+                    "readable_name": "apparent heat index",
+                    "value": 47.358,
+                    "baseline_mean": 37.463,
+                    "effect": "increases_risk",
+                    "contribution_points": 29.784,
+                    "importance": 0.9338
+                  },
+                  {
+                    "feature": "temp_max_anomaly_c",
+                    "readable_name": "maximum temperature anomaly",
+                    "value": 5.7,
+                    "baseline_mean": 0.366,
+                    "effect": "increases_risk",
+                    "contribution_points": 3.913,
+                    "importance": 0.0117
+                  },
+                  {
+                    "feature": "temp_anomaly_c",
+                    "readable_name": "temperature anomaly above monthly normal",
+                    "value": 8.6,
+                    "baseline_mean": 0.039,
+                    "effect": "increases_risk",
+                    "contribution_points": 3.544,
+                    "importance": 0.0151
+                  },
+                  {
+                    "feature": "temp_rolling_3d_mean",
+                    "readable_name": "3-day average temperature",
+                    "value": 38.4,
+                    "baseline_mean": 25.091,
+                    "effect": "increases_risk",
+                    "contribution_points": 2.435,
+                    "importance": 0.0073
+                  }
+                ],
+                "global_feature_importance": {
+                  "heat_index_c": 0.9338,
+                  "temp_anomaly_c": 0.0151,
+                  "temp_max_c": 0.0127,
+                  "temp_max_anomaly_c": 0.0117,
+                  "temperature_c": 0.0079,
+                  "temp_rolling_3d_mean": 0.0073
+                },
+                "summary": "Elevated heat hazard (90.9/100 vs baseline 42.3/100) was primarily driven upward by apparent heat index, maximum temperature anomaly, temperature anomaly above monthly normal.",
+                "limitations": "Trained on meteorological heat hazard proxy (NOAA Heat Index + Wet-Bulb + IMD thermal anomaly). Does not incorporate indoor building thermal insulation, urban canyon micro-scale radiative trapping, or clinical hospital heat-stroke admission records."
+              },
+              "flood": {
+                "hazard": "flood",
+                "predicted_score": 0.59,
+                "baseline_expected_score": 7.76,
+                "attribution_method": "interventional_model_attribution",
+                "primary_factors": [
+                  {
+                    "feature": "runoff_potential_index",
+                    "readable_name": "surface runoff & drainage index",
+                    "value": 2.114,
+                    "baseline_mean": 25.745,
+                    "effect": "decreases_risk",
+                    "contribution_points": -4.762,
+                    "importance": 0.3744
+                  },
+                  {
+                    "feature": "rainfall_mm",
+                    "readable_name": "daily rainfall",
+                    "value": 0.0,
+                    "baseline_mean": 5.902,
+                    "effect": "decreases_risk",
+                    "contribution_points": -1.131,
+                    "importance": 0.2743
+                  },
+                  {
+                    "feature": "rainfall_intensity_mm_hr",
+                    "readable_name": "peak hourly rainfall intensity",
+                    "value": 0.0,
+                    "baseline_mean": 1.866,
+                    "effect": "decreases_risk",
+                    "contribution_points": -0.542,
+                    "importance": 0.0915
+                  },
+                  {
+                    "feature": "soil_moisture",
+                    "readable_name": "soil moisture saturation",
+                    "value": 0.12,
+                    "baseline_mean": 0.281,
+                    "effect": "decreases_risk",
+                    "contribution_points": -0.0,
+                    "importance": 0.1396
+                  }
+                ],
+                "global_feature_importance": {
+                  "runoff_potential_index": 0.3744,
+                  "rainfall_mm": 0.2743,
+                  "soil_moisture": 0.1396,
+                  "rainfall_intensity_mm_hr": 0.0915,
+                  "rainfall_anomaly_mm": 0.0908,
+                  "rainfall_rolling_7d_sum": 0.0158
+                },
+                "summary": "Low flood hazard (0.6/100 vs baseline 7.8/100) reflects favorable surface runoff & drainage index, daily rainfall, peak hourly rainfall intensity below climatological stress thresholds.",
+                "limitations": "Implements a Hydrometeorological Rainfall-Runoff Flood-Hazard Proxy. High rainfall alone does not confirm street-level inundation; does not model real-time dam reservoir releases (e.g., Khadakwasla discharge) or localized municipal stormwater drain blockages."
+              },
+              "air_quality": {
+                "hazard": "air_quality",
+                "predicted_score": 38.28,
+                "baseline_expected_score": 33.72,
+                "attribution_method": "interventional_model_attribution",
+                "primary_factors": [
+                  {
+                    "feature": "cpcb_calculated_aqi",
+                    "readable_name": "CPCB calculated AQI",
+                    "value": 124.1,
+                    "baseline_mean": 105.152,
+                    "effect": "increases_risk",
+                    "contribution_points": 3.763,
+                    "importance": 0.6016
+                  },
+                  {
+                    "feature": "pm10_ugm3",
+                    "readable_name": "PM10 concentration",
+                    "value": 135.0,
+                    "baseline_mean": 103.187,
+                    "effect": "increases_risk",
+                    "contribution_points": 0.362,
+                    "importance": 0.3516
+                  },
+                  {
+                    "feature": "pollutant_load_index",
+                    "readable_name": "pollutant_load_index",
+                    "value": 0.137,
+                    "baseline_mean": 0.113,
+                    "effect": "increases_risk",
+                    "contribution_points": 0.264,
+                    "importance": 0.0027
+                  },
+                  {
+                    "feature": "pm25_ugm3",
+                    "readable_name": "PM2.5 concentration",
+                    "value": 58.0,
+                    "baseline_mean": 47.373,
+                    "effect": "increases_risk",
+                    "contribution_points": 0.027,
+                    "importance": 0.0423
+                  }
+                ],
+                "global_feature_importance": {
+                  "cpcb_calculated_aqi": 0.6016,
+                  "pm10_ugm3": 0.3516,
+                  "pm25_ugm3": 0.0423,
+                  "pollutant_load_index": 0.0027,
+                  "wind_stagnation_index": 0.001,
+                  "wind_speed_kmh": 0.0008
+                },
+                "summary": "Elevated air_quality hazard (38.3/100 vs baseline 33.7/100) was primarily driven upward by CPCB calculated AQI, PM10 concentration, pollutant_load_index.",
+                "limitations": "Calibrated to official Indian CPCB NAQI sub-indices. Does not account for sudden episodic point-source emissions (e.g., localized crop burning plumes, traffic accidents, or festival firecracker spikes) unless reflected in incoming pollutant sensor readings."
+              },
+              "water_stress": {
+                "hazard": "water_stress",
+                "predicted_score": 95.05,
+                "baseline_expected_score": 37.55,
+                "attribution_method": "interventional_model_attribution",
+                "primary_factors": [
+                  {
+                    "feature": "soil_moisture_rolling_7d_mean",
+                    "readable_name": "soil_moisture_rolling_7d_mean",
+                    "value": 0.12,
+                    "baseline_mean": 0.281,
+                    "effect": "increases_risk",
+                    "contribution_points": 25.447,
+                    "importance": 0.8781
+                  },
+                  {
+                    "feature": "hydro_water_deficit_30d_mm",
+                    "readable_name": "30-day cumulative water balance deficit",
+                    "value": 208.5,
+                    "baseline_mean": -10.204,
+                    "effect": "increases_risk",
+                    "contribution_points": 17.35,
+                    "importance": 0.0457
+                  },
+                  {
+                    "feature": "soil_moisture",
+                    "readable_name": "soil moisture saturation",
+                    "value": 0.12,
+                    "baseline_mean": 0.281,
+                    "effect": "increases_risk",
+                    "contribution_points": 3.967,
+                    "importance": 0.031
+                  },
+                  {
+                    "feature": "vapor_pressure_deficit_kpa",
+                    "readable_name": "vapor_pressure_deficit_kpa",
+                    "value": 4.874,
+                    "baseline_mean": 1.318,
+                    "effect": "increases_risk",
+                    "contribution_points": 3.428,
+                    "importance": 0.0039
+                  }
+                ],
+                "global_feature_importance": {
+                  "soil_moisture_rolling_7d_mean": 0.8781,
+                  "hydro_water_deficit_30d_mm": 0.0457,
+                  "soil_moisture": 0.031,
+                  "rainfall_rolling_14d_sum": 0.0249,
+                  "rainfall_rolling_30d_sum": 0.0076,
+                  "aridity_stress_index": 0.0042
+                },
+                "summary": "Elevated water_stress hazard (95.0/100 vs baseline 37.5/100) was primarily driven upward by soil_moisture_rolling_7d_mean, 30-day cumulative water balance deficit, soil moisture saturation.",
+                "limitations": "Quantifies environmental and hydro-climatic moisture deficit (30d ET minus rainfall and soil moisture depletion). Does not measure municipal dam storage volumes, groundwater table drawdowns, or piped water distribution equity."
+              }
+            }
+          }
+        },
+        "what_if": {
+          "baseline_score": 54.33,
+          "scenario_score": 56.0,
+          "baseline_risk_level": "Moderate",
+          "scenario_risk_level": "Moderate",
+          "change": 1.67,
+          "change_percentage": 3.07,
+          "scenario": {
+            "temperature_delta_c": 2.5,
+            "soil_moisture_change_percent": -20.0
+          },
+          "hazard_comparison": {
+            "heat": {
+              "baseline": 90.95,
+              "scenario": 97.42,
+              "change": 6.47,
+              "change_percentage": 7.11
+            },
+            "flood": {
+              "baseline": 0.59,
+              "scenario": 0.59,
+              "change": 0.0,
+              "change_percentage": 0.0
+            },
+            "air_quality": {
+              "baseline": 38.28,
+              "scenario": 38.28,
+              "change": 0.0,
+              "change_percentage": 0.0
+            },
+            "water_stress": {
+              "baseline": 95.05,
+              "scenario": 95.24,
+              "change": 0.19,
+              "change_percentage": 0.2
+            }
+          },
+          "explanation": "Under scenario {'temperature_delta_c': 2.5, 'soil_moisture_change_percent': -20.0}, heat risk increased by 6.47 pts (91.0 -> 97.4); water_stress risk increased by 0.19 pts (95.0 -> 95.2). Overall Climate Risk Score moved from 54.33 (Moderate) to 56.00 (Moderate).",
+          "out_of_distribution_warnings": [
+            "Scenario places 'temp_max_c' (45.10) in extreme tail regime outside typical training range [15.0, 43.0]."
+          ],
+          "simulation_disclaimer": "Model-based counterfactual simulation estimate only; not a guaranteed future weather forecast."
+        },
+        "recommendations": [
+          {
+            "hazard": "heat",
+            "priority": "Critical",
+            "action": "Issue outdoor worker heat-hydration advisory between 12:00\u201316:00 and activate urban cooling shelters."
+          },
+          {
+            "hazard": "water_stress",
+            "priority": "Critical",
+            "action": "Optimize agricultural drip-irrigation scheduling and prioritize soil-moisture conservation mulching."
+          }
+        ]
+      }
+    },
+    "case_b_pune_monsoon_downpour": {
+      "description": "Pune SW Monsoon Heavy Downpour on Saturated Soil (July)",
+      "result": {
+        "location": "Pune",
+        "timestamp": "2026-07-24T12:00:00",
+        "data_status": "available",
+        "risks": {
+          "heat": 29.05,
+          "flood": 77.49,
+          "air_quality": 12.75,
+          "water_stress": 0.11
+        },
+        "hazard_details": {
+          "heat": {
+            "heat_risk": 29.05,
+            "risk_level": "Low",
+            "confidence": 0.93,
+            "contributing_factors": [
+              "heat_index_c",
+              "temp_max_anomaly_c",
+              "temp_anomaly_c",
+              "temp_max_c"
+            ],
+            "model_used": "gradient_boosting_xgb_equivalent",
+            "methodology_note": "Meteorological heat-hazard proxy (0-100) calibrated on NOAA Heat Index, Wet-Bulb temperature, and IMD thermal anomalies."
+          },
+          "flood": {
+            "flood_risk": 77.49,
+            "risk_level": "High",
+            "confidence": 0.95,
+            "contributing_factors": [
+              "runoff_potential_index",
+              "rainfall_mm",
+              "rainfall_intensity_mm_hr",
+              "rainfall_anomaly_mm"
+            ],
+            "forecast_next_24h_rainfall_mm": 28.55,
+            "is_proxy_hazard": true,
+            "data_availability": {
+              "soil_moisture_measured": true,
+              "elevation_available": true,
+              "historical_flood_polygon_labels_available": false
+            },
+            "limitations": "High rainfall does not automatically mean flooding. Output is a hydrometeorological rainfall-runoff flood-hazard proxy; real-time dam release and street stormwater blockage data are not included.",
+            "model_used": "gradient_boosting_xgb_equivalent"
+          },
+          "air_quality": {
+            "air_quality_risk": 12.75,
+            "risk_level": "Very Low",
+            "confidence": 0.98,
+            "dominant_pollutants": [
+              "PM10",
+              "PM2.5",
+              "CO"
+            ],
+            "cpcb_calculated_aqi": 38.0,
+            "source_measured_aqi": null,
+            "aqi_source_distinction": "ml_hazard_and_cpcb_subindex_calculated_from_pollutants",
+            "model_used": "gradient_boosting_xgb_equivalent"
+          },
+          "water_stress": {
+            "water_stress_risk": 0.11,
+            "risk_level": "Very Low",
+            "confidence": 0.91,
+            "contributing_factors": [
+              "soil_moisture_rolling_7d_mean",
+              "hydro_water_deficit_30d_mm",
+              "soil_moisture",
+              "rainfall_rolling_14d_sum"
+            ],
+            "data_status_notes": [
+              "All primary hydro-climatic inputs available."
+            ],
+            "scope_disclaimer": "Represents environmental/climatic water stress only. Municipal reservoir levels, groundwater depth, and piped water supply are not measured.",
+            "model_used": "gradient_boosting_xgb_equivalent"
+          }
+        },
+        "climate_risk_score": 33.09,
+        "risk_level": "Low",
+        "weights": {
+          "heat": 0.25,
+          "flood": 0.3,
+          "air_quality": 0.2,
+          "water_stress": 0.25
+        },
+        "data_coverage": 100.0,
+        "input_feature_coverage_pct": 100.0,
+        "explainability": {
+          "explanation": {
+            "primary_factors": [
+              {
+                "feature": "soil_moisture",
+                "readable_name": "soil moisture saturation",
+                "value": 0.86,
+                "baseline_mean": 0.281,
+                "effect": "decreases_risk",
+                "contribution_points": -26.265,
+                "importance": 0.031,
+                "hazard_domain": "water_stress"
+              },
+              {
+                "feature": "runoff_potential_index",
+                "readable_name": "surface runoff & drainage index",
+                "value": 306.0,
+                "baseline_mean": 25.745,
+                "effect": "increases_risk",
+                "contribution_points": 19.671,
+                "importance": 0.3744,
+                "hazard_domain": "flood"
+              },
+              {
+                "feature": "cpcb_calculated_aqi",
+                "readable_name": "CPCB calculated AQI",
+                "value": 38.0,
+                "baseline_mean": 105.152,
+                "effect": "decreases_risk",
+                "contribution_points": -12.058,
+                "importance": 0.6016,
+                "hazard_domain": "air_quality"
+              },
+              {
+                "feature": "heat_index_c",
+                "readable_name": "apparent heat index",
+                "value": 33.216,
+                "baseline_mean": 37.463,
+                "effect": "decreases_risk",
+                "contribution_points": -10.428,
+                "importance": 0.9338,
+                "hazard_domain": "heat"
+              }
+            ],
+            "summary": "Low heat hazard (29.1/100 vs baseline 42.3/100) reflects favorable apparent heat index, wind speed, temp_max_rolling_3d_mean below climatological stress thresholds. Elevated flood hazard (77.5/100 vs baseline 7.8/100) was primarily driven upward by surface runoff & drainage index, daily rainfall, peak hourly rainfall intensity. Low air_quality hazard (12.8/100 vs baseline 33.7/100) reflects favorable CPCB calculated AQI, PM10 concentration, pollutant_load_index below climatological stress thresholds. Low water_stress hazard (0.1/100 vs baseline 37.5/100) reflects favorable soil moisture saturation, soil_moisture_rolling_7d_mean, relative humidity below climatological stress thresholds.",
+            "by_hazard": {
+              "heat": {
+                "hazard": "heat",
+                "predicted_score": 29.05,
+                "baseline_expected_score": 42.31,
+                "attribution_method": "interventional_model_attribution",
+                "primary_factors": [
+                  {
+                    "feature": "heat_index_c",
+                    "readable_name": "apparent heat index",
+                    "value": 33.216,
+                    "baseline_mean": 37.463,
+                    "effect": "decreases_risk",
+                    "contribution_points": -10.428,
+                    "importance": 0.9338
+                  },
+                  {
+                    "feature": "wind_speed_kmh",
+                    "readable_name": "wind speed",
+                    "value": 22.0,
+                    "baseline_mean": 10.38,
+                    "effect": "decreases_risk",
+                    "contribution_points": -1.956,
+                    "importance": 0.0031
+                  },
+                  {
+                    "feature": "temp_max_rolling_3d_mean",
+                    "readable_name": "temp_max_rolling_3d_mean",
+                    "value": 27.6,
+                    "baseline_mean": 32.205,
+                    "effect": "decreases_risk",
+                    "contribution_points": -1.553,
+                    "importance": 0.0043
+                  },
+                  {
+                    "feature": "temp_max_anomaly_c",
+                    "readable_name": "maximum temperature anomaly",
+                    "value": -0.5,
+                    "baseline_mean": 0.366,
+                    "effect": "decreases_risk",
+                    "contribution_points": -1.095,
+                    "importance": 0.0117
+                  }
+                ],
+                "global_feature_importance": {
+                  "heat_index_c": 0.9338,
+                  "temp_anomaly_c": 0.0151,
+                  "temp_max_c": 0.0127,
+                  "temp_max_anomaly_c": 0.0117,
+                  "temperature_c": 0.0079,
+                  "temp_rolling_3d_mean": 0.0073
+                },
+                "summary": "Low heat hazard (29.1/100 vs baseline 42.3/100) reflects favorable apparent heat index, wind speed, temp_max_rolling_3d_mean below climatological stress thresholds.",
+                "limitations": "Trained on meteorological heat hazard proxy (NOAA Heat Index + Wet-Bulb + IMD thermal anomaly). Does not incorporate indoor building thermal insulation, urban canyon micro-scale radiative trapping, or clinical hospital heat-stroke admission records."
+              },
+              "flood": {
+                "hazard": "flood",
+                "predicted_score": 77.49,
+                "baseline_expected_score": 7.76,
+                "attribution_method": "interventional_model_attribution",
+                "primary_factors": [
+                  {
+                    "feature": "runoff_potential_index",
+                    "readable_name": "surface runoff & drainage index",
+                    "value": 306.0,
+                    "baseline_mean": 25.745,
+                    "effect": "increases_risk",
+                    "contribution_points": 19.671,
+                    "importance": 0.3744
+                  },
+                  {
+                    "feature": "rainfall_mm",
+                    "readable_name": "daily rainfall",
+                    "value": 112.0,
+                    "baseline_mean": 5.902,
+                    "effect": "increases_risk",
+                    "contribution_points": 12.192,
+                    "importance": 0.2743
+                  },
+                  {
+                    "feature": "rainfall_intensity_mm_hr",
+                    "readable_name": "peak hourly rainfall intensity",
+                    "value": 36.5,
+                    "baseline_mean": 1.866,
+                    "effect": "increases_risk",
+                    "contribution_points": 10.12,
+                    "importance": 0.0915
+                  },
+                  {
+                    "feature": "rainfall_anomaly_mm",
+                    "readable_name": "rainfall_anomaly_mm",
+                    "value": 104.1,
+                    "baseline_mean": 3.581,
+                    "effect": "increases_risk",
+                    "contribution_points": 8.562,
+                    "importance": 0.0908
+                  }
+                ],
+                "global_feature_importance": {
+                  "runoff_potential_index": 0.3744,
+                  "rainfall_mm": 0.2743,
+                  "soil_moisture": 0.1396,
+                  "rainfall_intensity_mm_hr": 0.0915,
+                  "rainfall_anomaly_mm": 0.0908,
+                  "rainfall_rolling_7d_sum": 0.0158
+                },
+                "summary": "Elevated flood hazard (77.5/100 vs baseline 7.8/100) was primarily driven upward by surface runoff & drainage index, daily rainfall, peak hourly rainfall intensity.",
+                "limitations": "Implements a Hydrometeorological Rainfall-Runoff Flood-Hazard Proxy. High rainfall alone does not confirm street-level inundation; does not model real-time dam reservoir releases (e.g., Khadakwasla discharge) or localized municipal stormwater drain blockages."
+              },
+              "air_quality": {
+                "hazard": "air_quality",
+                "predicted_score": 12.75,
+                "baseline_expected_score": 33.72,
+                "attribution_method": "interventional_model_attribution",
+                "primary_factors": [
+                  {
+                    "feature": "cpcb_calculated_aqi",
+                    "readable_name": "CPCB calculated AQI",
+                    "value": 38.0,
+                    "baseline_mean": 105.152,
+                    "effect": "decreases_risk",
+                    "contribution_points": -12.058,
+                    "importance": 0.6016
+                  },
+                  {
+                    "feature": "pm10_ugm3",
+                    "readable_name": "PM10 concentration",
+                    "value": 38.0,
+                    "baseline_mean": 103.187,
+                    "effect": "decreases_risk",
+                    "contribution_points": -7.751,
+                    "importance": 0.3516
+                  },
+                  {
+                    "feature": "pollutant_load_index",
+                    "readable_name": "pollutant_load_index",
+                    "value": 0.049,
+                    "baseline_mean": 0.113,
+                    "effect": "decreases_risk",
+                    "contribution_points": -0.389,
+                    "importance": 0.0027
+                  },
+                  {
+                    "feature": "wind_stagnation_index",
+                    "readable_name": "low-wind atmospheric stagnation",
+                    "value": 0.233,
+                    "baseline_mean": 0.457,
+                    "effect": "decreases_risk",
+                    "contribution_points": -0.35,
+                    "importance": 0.001
+                  }
+                ],
+                "global_feature_importance": {
+                  "cpcb_calculated_aqi": 0.6016,
+                  "pm10_ugm3": 0.3516,
+                  "pm25_ugm3": 0.0423,
+                  "pollutant_load_index": 0.0027,
+                  "wind_stagnation_index": 0.001,
+                  "wind_speed_kmh": 0.0008
+                },
+                "summary": "Low air_quality hazard (12.8/100 vs baseline 33.7/100) reflects favorable CPCB calculated AQI, PM10 concentration, pollutant_load_index below climatological stress thresholds.",
+                "limitations": "Calibrated to official Indian CPCB NAQI sub-indices. Does not account for sudden episodic point-source emissions (e.g., localized crop burning plumes, traffic accidents, or festival firecracker spikes) unless reflected in incoming pollutant sensor readings."
+              },
+              "water_stress": {
+                "hazard": "water_stress",
+                "predicted_score": 0.11,
+                "baseline_expected_score": 37.55,
+                "attribution_method": "interventional_model_attribution",
+                "primary_factors": [
+                  {
+                    "feature": "soil_moisture",
+                    "readable_name": "soil moisture saturation",
+                    "value": 0.86,
+                    "baseline_mean": 0.281,
+                    "effect": "decreases_risk",
+                    "contribution_points": -26.265,
+                    "importance": 0.031
+                  },
+                  {
+                    "feature": "soil_moisture_rolling_7d_mean",
+                    "readable_name": "soil_moisture_rolling_7d_mean",
+                    "value": 0.86,
+                    "baseline_mean": 0.281,
+                    "effect": "decreases_risk",
+                    "contribution_points": -0.648,
+                    "importance": 0.8781
+                  },
+                  {
+                    "feature": "humidity_pct",
+                    "readable_name": "relative humidity",
+                    "value": 92.0,
+                    "baseline_mean": 60.385,
+                    "effect": "decreases_risk",
+                    "contribution_points": -2.491,
+                    "importance": 0.0003
+                  },
+                  {
+                    "feature": "rainfall_rolling_30d_sum",
+                    "readable_name": "rainfall_rolling_30d_sum",
+                    "value": 491.7,
+                    "baseline_mean": 176.496,
+                    "effect": "decreases_risk",
+                    "contribution_points": -1.983,
+                    "importance": 0.0076
+                  }
+                ],
+                "global_feature_importance": {
+                  "soil_moisture_rolling_7d_mean": 0.8781,
+                  "hydro_water_deficit_30d_mm": 0.0457,
+                  "soil_moisture": 0.031,
+                  "rainfall_rolling_14d_sum": 0.0249,
+                  "rainfall_rolling_30d_sum": 0.0076,
+                  "aridity_stress_index": 0.0042
+                },
+                "summary": "Low water_stress hazard (0.1/100 vs baseline 37.5/100) reflects favorable soil moisture saturation, soil_moisture_rolling_7d_mean, relative humidity below climatological stress thresholds.",
+                "limitations": "Quantifies environmental and hydro-climatic moisture deficit (30d ET minus rainfall and soil moisture depletion). Does not measure municipal dam storage volumes, groundwater table drawdowns, or piped water distribution equity."
+              }
+            }
+          }
+        },
+        "what_if": {
+          "baseline_score": 33.09,
+          "scenario_score": 35.34,
+          "baseline_risk_level": "Low",
+          "scenario_risk_level": "Low",
+          "change": 2.25,
+          "change_percentage": 6.8,
+          "scenario": {
+            "rainfall_change_percent": 30.0
+          },
+          "hazard_comparison": {
+            "heat": {
+              "baseline": 29.05,
+              "scenario": 29.05,
+              "change": 0.0,
+              "change_percentage": 0.0
+            },
+            "flood": {
+              "baseline": 77.49,
+              "scenario": 84.97,
+              "change": 7.48,
+              "change_percentage": 9.65
+            },
+            "air_quality": {
+              "baseline": 12.75,
+              "scenario": 12.75,
+              "change": 0.0,
+              "change_percentage": 0.0
+            },
+            "water_stress": {
+              "baseline": 0.11,
+              "scenario": 0.13,
+              "change": 0.02,
+              "change_percentage": 18.18
+            }
+          },
+          "explanation": "Under scenario {'rainfall_change_percent': 30.0}, flood risk increased by 7.48 pts (77.5 -> 85.0). Overall Climate Risk Score moved from 33.09 (Low) to 35.34 (Low).",
+          "out_of_distribution_warnings": [
+            "Scenario places 'rainfall_mm' (145.60) in extreme tail regime outside typical training range [0.0, 115.0].",
+            "Scenario places 'rainfall_intensity_mm_hr' (47.45) in extreme tail regime outside typical training range [0.0, 35.0]."
+          ],
+          "simulation_disclaimer": "Model-based counterfactual simulation estimate only; not a guaranteed future weather forecast."
+        },
+        "recommendations": [
+          {
+            "hazard": "flood",
+            "priority": "High",
+            "action": "Monitor low-lying drainage bottlenecks and pre-position stormwater pumping units."
+          }
+        ]
+      }
+    },
+    "case_c_pune_winter_inversion_smog": {
+      "description": "Pune Winter Thermal Inversion & Particulate Accumulation (December)",
+      "result": {
+        "location": "Pune",
+        "timestamp": "2026-12-19T09:00:00",
+        "data_status": "available",
+        "risks": {
+          "heat": 8.43,
+          "flood": 0.09,
+          "air_quality": 68.72,
+          "water_stress": 30.76
+        },
+        "hazard_details": {
+          "heat": {
+            "heat_risk": 8.43,
+            "risk_level": "Very Low",
+            "confidence": 0.93,
+            "contributing_factors": [
+              "heat_index_c",
+              "temp_anomaly_c",
+              "temp_max_anomaly_c",
+              "temp_max_c"
+            ],
+            "model_used": "gradient_boosting_xgb_equivalent",
+            "methodology_note": "Meteorological heat-hazard proxy (0-100) calibrated on NOAA Heat Index, Wet-Bulb temperature, and IMD thermal anomalies."
+          },
+          "flood": {
+            "flood_risk": 0.09,
+            "risk_level": "Very Low",
+            "confidence": 0.95,
+            "contributing_factors": [
+              "runoff_potential_index",
+              "rainfall_mm",
+              "rainfall_anomaly_mm",
+              "rainfall_intensity_mm_hr"
+            ],
+            "forecast_next_24h_rainfall_mm": 0.12,
+            "is_proxy_hazard": true,
+            "data_availability": {
+              "soil_moisture_measured": true,
+              "elevation_available": true,
+              "historical_flood_polygon_labels_available": false
+            },
+            "limitations": "High rainfall does not automatically mean flooding. Output is a hydrometeorological rainfall-runoff flood-hazard proxy; real-time dam release and street stormwater blockage data are not included.",
+            "model_used": "gradient_boosting_xgb_equivalent"
+          },
+          "air_quality": {
+            "air_quality_risk": 68.72,
+            "risk_level": "High",
+            "confidence": 0.98,
+            "dominant_pollutants": [
+              "PM2.5",
+              "PM10",
+              "NO2"
+            ],
+            "cpcb_calculated_aqi": 326.9,
+            "source_measured_aqi": 326.0,
+            "aqi_source_distinction": "source_measured_aqi_and_ml_hazard_both_available",
+            "model_used": "gradient_boosting_xgb_equivalent"
+          },
+          "water_stress": {
+            "water_stress_risk": 30.76,
+            "risk_level": "Low",
+            "confidence": 0.91,
+            "contributing_factors": [
+              "soil_moisture_rolling_7d_mean",
+              "hydro_water_deficit_30d_mm",
+              "rainfall_rolling_14d_sum",
+              "soil_moisture"
+            ],
+            "data_status_notes": [
+              "All primary hydro-climatic inputs available."
+            ],
+            "scope_disclaimer": "Represents environmental/climatic water stress only. Municipal reservoir levels, groundwater depth, and piped water supply are not measured.",
+            "model_used": "gradient_boosting_xgb_equivalent"
+          }
+        },
+        "climate_risk_score": 23.57,
+        "risk_level": "Low",
+        "weights": {
+          "heat": 0.25,
+          "flood": 0.3,
+          "air_quality": 0.2,
+          "water_stress": 0.25
+        },
+        "data_coverage": 100.0,
+        "input_feature_coverage_pct": 100.0,
+        "explainability": {
+          "explanation": {
+            "primary_factors": [
+              {
+                "feature": "heat_index_c",
+                "readable_name": "apparent heat index",
+                "value": 28.963,
+                "baseline_mean": 37.463,
+                "effect": "decreases_risk",
+                "contribution_points": -24.555,
+                "importance": 0.9338,
+                "hazard_domain": "heat"
+              },
+              {
+                "feature": "cpcb_calculated_aqi",
+                "readable_name": "CPCB calculated AQI",
+                "value": 326.892,
+                "baseline_mean": 105.152,
+                "effect": "increases_risk",
+                "contribution_points": 21.087,
+                "importance": 0.6016,
+                "hazard_domain": "air_quality"
+              },
+              {
+                "feature": "runoff_potential_index",
+                "readable_name": "surface runoff & drainage index",
+                "value": 0.382,
+                "baseline_mean": 25.745,
+                "effect": "decreases_risk",
+                "contribution_points": -4.964,
+                "importance": 0.3744,
+                "hazard_domain": "flood"
+              },
+              {
+                "feature": "soil_moisture_rolling_7d_mean",
+                "readable_name": "soil_moisture_rolling_7d_mean",
+                "value": 0.34,
+                "baseline_mean": 0.281,
+                "effect": "decreases_risk",
+                "contribution_points": -0.177,
+                "importance": 0.8781,
+                "hazard_domain": "water_stress"
+              }
+            ],
+            "summary": "Low heat hazard (8.4/100 vs baseline 42.3/100) reflects favorable apparent heat index, maximum temperature anomaly, temp_max_rolling_3d_mean below climatological stress thresholds. Low flood hazard (0.1/100 vs baseline 7.8/100) reflects favorable surface runoff & drainage index, daily rainfall, peak hourly rainfall intensity below climatological stress thresholds. Elevated air_quality hazard (68.7/100 vs baseline 33.7/100) was primarily driven upward by CPCB calculated AQI, PM2.5 concentration, PM10 concentration. For water_stress hazard (predicted score 30.8/100 vs baseline 37.5/100), rainfall_rolling_14d_sum increased estimated risk, while soil_moisture_rolling_7d_mean, soil_moisture_lag_1d partially moderated the hazard.",
+            "by_hazard": {
+              "heat": {
+                "hazard": "heat",
+                "predicted_score": 8.43,
+                "baseline_expected_score": 42.31,
+                "attribution_method": "interventional_model_attribution",
+                "primary_factors": [
+                  {
+                    "feature": "heat_index_c",
+                    "readable_name": "apparent heat index",
+                    "value": 28.963,
+                    "baseline_mean": 37.463,
+                    "effect": "decreases_risk",
+                    "contribution_points": -24.555,
+                    "importance": 0.9338
+                  },
+                  {
+                    "feature": "temp_max_anomaly_c",
+                    "readable_name": "maximum temperature anomaly",
+                    "value": -1.5,
+                    "baseline_mean": 0.366,
+                    "effect": "decreases_risk",
+                    "contribution_points": -3.424,
+                    "importance": 0.0117
+                  },
+                  {
+                    "feature": "temp_max_rolling_3d_mean",
+                    "readable_name": "temp_max_rolling_3d_mean",
+                    "value": 27.4,
+                    "baseline_mean": 32.205,
+                    "effect": "decreases_risk",
+                    "contribution_points": -2.869,
+                    "importance": 0.0043
+                  },
+                  {
+                    "feature": "temp_anomaly_c",
+                    "readable_name": "temperature anomaly above monthly normal",
+                    "value": -2.6,
+                    "baseline_mean": 0.039,
+                    "effect": "decreases_risk",
+                    "contribution_points": -1.92,
+                    "importance": 0.0151
+                  }
+                ],
+                "global_feature_importance": {
+                  "heat_index_c": 0.9338,
+                  "temp_anomaly_c": 0.0151,
+                  "temp_max_c": 0.0127,
+                  "temp_max_anomaly_c": 0.0117,
+                  "temperature_c": 0.0079,
+                  "temp_rolling_3d_mean": 0.0073
+                },
+                "summary": "Low heat hazard (8.4/100 vs baseline 42.3/100) reflects favorable apparent heat index, maximum temperature anomaly, temp_max_rolling_3d_mean below climatological stress thresholds.",
+                "limitations": "Trained on meteorological heat hazard proxy (NOAA Heat Index + Wet-Bulb + IMD thermal anomaly). Does not incorporate indoor building thermal insulation, urban canyon micro-scale radiative trapping, or clinical hospital heat-stroke admission records."
+              },
+              "flood": {
+                "hazard": "flood",
+                "predicted_score": 0.09,
+                "baseline_expected_score": 7.76,
+                "attribution_method": "interventional_model_attribution",
+                "primary_factors": [
+                  {
+                    "feature": "runoff_potential_index",
+                    "readable_name": "surface runoff & drainage index",
+                    "value": 0.382,
+                    "baseline_mean": 25.745,
+                    "effect": "decreases_risk",
+                    "contribution_points": -4.964,
+                    "importance": 0.3744
+                  },
+                  {
+                    "feature": "rainfall_mm",
+                    "readable_name": "daily rainfall",
+                    "value": 0.0,
+                    "baseline_mean": 5.902,
+                    "effect": "decreases_risk",
+                    "contribution_points": -1.309,
+                    "importance": 0.2743
+                  },
+                  {
+                    "feature": "rainfall_intensity_mm_hr",
+                    "readable_name": "peak hourly rainfall intensity",
+                    "value": 0.0,
+                    "baseline_mean": 1.866,
+                    "effect": "decreases_risk",
+                    "contribution_points": -0.514,
+                    "importance": 0.0915
+                  },
+                  {
+                    "feature": "rainfall_rolling_7d_sum",
+                    "readable_name": "7-day cumulative rainfall",
+                    "value": 1.2,
+                    "baseline_mean": 41.254,
+                    "effect": "decreases_risk",
+                    "contribution_points": -0.834,
+                    "importance": 0.0158
+                  }
+                ],
+                "global_feature_importance": {
+                  "runoff_potential_index": 0.3744,
+                  "rainfall_mm": 0.2743,
+                  "soil_moisture": 0.1396,
+                  "rainfall_intensity_mm_hr": 0.0915,
+                  "rainfall_anomaly_mm": 0.0908,
+                  "rainfall_rolling_7d_sum": 0.0158
+                },
+                "summary": "Low flood hazard (0.1/100 vs baseline 7.8/100) reflects favorable surface runoff & drainage index, daily rainfall, peak hourly rainfall intensity below climatological stress thresholds.",
+                "limitations": "Implements a Hydrometeorological Rainfall-Runoff Flood-Hazard Proxy. High rainfall alone does not confirm street-level inundation; does not model real-time dam reservoir releases (e.g., Khadakwasla discharge) or localized municipal stormwater drain blockages."
+              },
+              "air_quality": {
+                "hazard": "air_quality",
+                "predicted_score": 68.72,
+                "baseline_expected_score": 33.72,
+                "attribution_method": "interventional_model_attribution",
+                "primary_factors": [
+                  {
+                    "feature": "cpcb_calculated_aqi",
+                    "readable_name": "CPCB calculated AQI",
+                    "value": 326.892,
+                    "baseline_mean": 105.152,
+                    "effect": "increases_risk",
+                    "contribution_points": 21.087,
+                    "importance": 0.6016
+                  },
+                  {
+                    "feature": "pm25_ugm3",
+                    "readable_name": "PM2.5 concentration",
+                    "value": 154.0,
+                    "baseline_mean": 47.373,
+                    "effect": "increases_risk",
+                    "contribution_points": 11.081,
+                    "importance": 0.0423
+                  },
+                  {
+                    "feature": "pm10_ugm3",
+                    "readable_name": "PM10 concentration",
+                    "value": 288.0,
+                    "baseline_mean": 103.187,
+                    "effect": "increases_risk",
+                    "contribution_points": 0.495,
+                    "importance": 0.3516
+                  },
+                  {
+                    "feature": "pollutant_load_index",
+                    "readable_name": "pollutant_load_index",
+                    "value": 0.29,
+                    "baseline_mean": 0.113,
+                    "effect": "increases_risk",
+                    "contribution_points": 1.452,
+                    "importance": 0.0027
+                  }
+                ],
+                "global_feature_importance": {
+                  "cpcb_calculated_aqi": 0.6016,
+                  "pm10_ugm3": 0.3516,
+                  "pm25_ugm3": 0.0423,
+                  "pollutant_load_index": 0.0027,
+                  "wind_stagnation_index": 0.001,
+                  "wind_speed_kmh": 0.0008
+                },
+                "summary": "Elevated air_quality hazard (68.7/100 vs baseline 33.7/100) was primarily driven upward by CPCB calculated AQI, PM2.5 concentration, PM10 concentration.",
+                "limitations": "Calibrated to official Indian CPCB NAQI sub-indices. Does not account for sudden episodic point-source emissions (e.g., localized crop burning plumes, traffic accidents, or festival firecracker spikes) unless reflected in incoming pollutant sensor readings."
+              },
+              "water_stress": {
+                "hazard": "water_stress",
+                "predicted_score": 30.76,
+                "baseline_expected_score": 37.55,
+                "attribution_method": "interventional_model_attribution",
+                "primary_factors": [
+                  {
+                    "feature": "soil_moisture_rolling_7d_mean",
+                    "readable_name": "soil_moisture_rolling_7d_mean",
+                    "value": 0.34,
+                    "baseline_mean": 0.281,
+                    "effect": "decreases_risk",
+                    "contribution_points": -0.177,
+                    "importance": 0.8781
+                  },
+                  {
+                    "feature": "soil_moisture_lag_1d",
+                    "readable_name": "soil_moisture_lag_1d",
+                    "value": 0.34,
+                    "baseline_mean": 0.281,
+                    "effect": "decreases_risk",
+                    "contribution_points": -4.465,
+                    "importance": 0.0011
+                  },
+                  {
+                    "feature": "soil_moisture",
+                    "readable_name": "soil moisture saturation",
+                    "value": 0.34,
+                    "baseline_mean": 0.281,
+                    "effect": "decreases_risk",
+                    "contribution_points": -3.484,
+                    "importance": 0.031
+                  },
+                  {
+                    "feature": "rainfall_rolling_14d_sum",
+                    "readable_name": "rainfall_rolling_14d_sum",
+                    "value": 0.0,
+                    "baseline_mean": 82.467,
+                    "effect": "increases_risk",
+                    "contribution_points": 2.272,
+                    "importance": 0.0249
+                  }
+                ],
+                "global_feature_importance": {
+                  "soil_moisture_rolling_7d_mean": 0.8781,
+                  "hydro_water_deficit_30d_mm": 0.0457,
+                  "soil_moisture": 0.031,
+                  "rainfall_rolling_14d_sum": 0.0249,
+                  "rainfall_rolling_30d_sum": 0.0076,
+                  "aridity_stress_index": 0.0042
+                },
+                "summary": "For water_stress hazard (predicted score 30.8/100 vs baseline 37.5/100), rainfall_rolling_14d_sum increased estimated risk, while soil_moisture_rolling_7d_mean, soil_moisture_lag_1d partially moderated the hazard.",
+                "limitations": "Quantifies environmental and hydro-climatic moisture deficit (30d ET minus rainfall and soil moisture depletion). Does not measure municipal dam storage volumes, groundwater table drawdowns, or piped water distribution equity."
+              }
+            }
+          }
+        },
+        "what_if": {
+          "baseline_score": 23.57,
+          "scenario_score": 22.33,
+          "baseline_risk_level": "Low",
+          "scenario_risk_level": "Low",
+          "change": -1.24,
+          "change_percentage": -5.26,
+          "scenario": {
+            "pm25_change_percent": -35.0,
+            "pm10_change_percent": -35.0
+          },
+          "hazard_comparison": {
+            "heat": {
+              "baseline": 8.43,
+              "scenario": 8.43,
+              "change": 0.0,
+              "change_percentage": 0.0
+            },
+            "flood": {
+              "baseline": 0.09,
+              "scenario": 0.09,
+              "change": 0.0,
+              "change_percentage": 0.0
+            },
+            "air_quality": {
+              "baseline": 68.72,
+              "scenario": 62.55,
+              "change": -6.17,
+              "change_percentage": -8.98
+            },
+            "water_stress": {
+              "baseline": 30.76,
+              "scenario": 30.76,
+              "change": 0.0,
+              "change_percentage": 0.0
+            }
+          },
+          "explanation": "Under scenario {'pm25_change_percent': -35.0, 'pm10_change_percent': -35.0}, air_quality risk decreased by 6.17 pts (68.7 -> 62.5). Overall Climate Risk Score moved from 23.57 (Low) to 22.33 (Low).",
+          "out_of_distribution_warnings": [],
+          "simulation_disclaimer": "Model-based counterfactual simulation estimate only; not a guaranteed future weather forecast."
+        },
+        "recommendations": [
+          {
+            "hazard": "air_quality",
+            "priority": "High",
+            "action": "Enforce dust-suppression misting at construction corridors and advise N95 masks for sensitive groups."
+          }
+        ]
+      }
+    }
+  },
+  "multi_city": {
+    "Pune": {
+      "location": "Pune",
+      "timestamp": "2026-06-18T12:00:00",
+      "data_status": "available",
+      "risks": {
+        "heat": 53.24,
+        "flood": 42.98,
+        "air_quality": 18.46,
+        "water_stress": 4.81
+      },
+      "hazard_details": {
+        "heat": {
+          "heat_risk": 53.24,
+          "risk_level": "Moderate",
+          "confidence": 0.85,
+          "contributing_factors": [
+            "heat_index_c",
+            "temp_anomaly_c",
+            "temp_max_anomaly_c",
+            "temp_max_c"
+          ],
+          "model_used": "gradient_boosting_xgb_equivalent",
+          "methodology_note": "Meteorological heat-hazard proxy (0-100) calibrated on NOAA Heat Index, Wet-Bulb temperature, and IMD thermal anomalies."
+        },
+        "flood": {
+          "flood_risk": 42.98,
+          "risk_level": "Moderate",
+          "confidence": 0.89,
+          "contributing_factors": [
+            "runoff_potential_index",
+            "rainfall_mm",
+            "rainfall_anomaly_mm",
+            "soil_moisture"
+          ],
+          "forecast_next_24h_rainfall_mm": 27.61,
+          "is_proxy_hazard": true,
+          "data_availability": {
+            "soil_moisture_measured": false,
+            "elevation_available": true,
+            "historical_flood_polygon_labels_available": false
+          },
+          "limitations": "High rainfall does not automatically mean flooding. Output is a hydrometeorological rainfall-runoff flood-hazard proxy; real-time dam release and street stormwater blockage data are not included.",
+          "model_used": "gradient_boosting_xgb_equivalent"
+        },
+        "air_quality": {
+          "air_quality_risk": 18.46,
+          "risk_level": "Very Low",
+          "confidence": 0.69,
+          "dominant_pollutants": [
+            "PM2.5",
+            "CO",
+            "O3"
+          ],
+          "cpcb_calculated_aqi": 54.3,
+          "source_measured_aqi": null,
+          "aqi_source_distinction": "ml_hazard_and_cpcb_subindex_calculated_from_pollutants",
+          "model_used": "gradient_boosting_xgb_equivalent"
+        },
+        "water_stress": {
+          "water_stress_risk": 4.81,
+          "risk_level": "Very Low",
+          "confidence": 0.78,
+          "contributing_factors": [
+            "soil_moisture_rolling_7d_mean",
+            "hydro_water_deficit_30d_mm",
+            "soil_moisture",
+            "rainfall_rolling_14d_sum"
+          ],
+          "data_status_notes": [
+            "Direct soil_moisture measurement unavailable; estimated via antecedent precipitation-humidity proxy.",
+            "Direct evapotranspiration_mm unavailable; estimated via Hargreaves temperature-radiation formula."
+          ],
+          "scope_disclaimer": "Represents environmental/climatic water stress only. Municipal reservoir levels, groundwater depth, and piped water supply are not measured.",
+          "model_used": "gradient_boosting_xgb_equivalent"
+        }
+      },
+      "climate_risk_score": 31.1,
+      "risk_level": "Low",
+      "weights": {
+        "heat": 0.25,
+        "flood": 0.3,
+        "air_quality": 0.2,
+        "water_stress": 0.25
+      },
+      "data_coverage": 100.0,
+      "input_feature_coverage_pct": 57.14,
+      "explainability": {},
+      "what_if": {},
+      "recommendations": [
+        {
+          "hazard": "overall",
+          "priority": "Routine",
+          "action": "Environmental conditions within manageable range (Score 31.1/100); continue routine telemetry monitoring."
+        }
+      ]
+    },
+    "Mumbai": {
+      "location": "Mumbai",
+      "timestamp": "2026-06-18T12:00:00",
+      "data_status": "available",
+      "risks": {
+        "heat": 64.79,
+        "flood": 57.32,
+        "air_quality": 21.1,
+        "water_stress": 0.89
+      },
+      "hazard_details": {
+        "heat": {
+          "heat_risk": 64.79,
+          "risk_level": "High",
+          "confidence": 0.85,
+          "contributing_factors": [
+            "heat_index_c",
+            "temp_anomaly_c",
+            "temp_max_anomaly_c",
+            "temp_max_c"
+          ],
+          "model_used": "gradient_boosting_xgb_equivalent",
+          "methodology_note": "Meteorological heat-hazard proxy (0-100) calibrated on NOAA Heat Index, Wet-Bulb temperature, and IMD thermal anomalies."
+        },
+        "flood": {
+          "flood_risk": 57.32,
+          "risk_level": "Moderate",
+          "confidence": 0.89,
+          "contributing_factors": [
+            "runoff_potential_index",
+            "rainfall_mm",
+            "rainfall_anomaly_mm",
+            "soil_moisture"
+          ],
+          "forecast_next_24h_rainfall_mm": 28.21,
+          "is_proxy_hazard": true,
+          "data_availability": {
+            "soil_moisture_measured": false,
+            "elevation_available": true,
+            "historical_flood_polygon_labels_available": false
+          },
+          "limitations": "High rainfall does not automatically mean flooding. Output is a hydrometeorological rainfall-runoff flood-hazard proxy; real-time dam release and street stormwater blockage data are not included.",
+          "model_used": "gradient_boosting_xgb_equivalent"
+        },
+        "air_quality": {
+          "air_quality_risk": 21.1,
+          "risk_level": "Low",
+          "confidence": 0.69,
+          "dominant_pollutants": [
+            "PM2.5",
+            "CO",
+            "O3"
+          ],
+          "cpcb_calculated_aqi": 70.6,
+          "source_measured_aqi": null,
+          "aqi_source_distinction": "ml_hazard_and_cpcb_subindex_calculated_from_pollutants",
+          "model_used": "gradient_boosting_xgb_equivalent"
+        },
+        "water_stress": {
+          "water_stress_risk": 0.89,
+          "risk_level": "Very Low",
+          "confidence": 0.78,
+          "contributing_factors": [
+            "soil_moisture_rolling_7d_mean",
+            "hydro_water_deficit_30d_mm",
+            "rainfall_rolling_14d_sum",
+            "soil_moisture"
+          ],
+          "data_status_notes": [
+            "Direct soil_moisture measurement unavailable; estimated via antecedent precipitation-humidity proxy.",
+            "Direct evapotranspiration_mm unavailable; estimated via Hargreaves temperature-radiation formula."
+          ],
+          "scope_disclaimer": "Represents environmental/climatic water stress only. Municipal reservoir levels, groundwater depth, and piped water supply are not measured.",
+          "model_used": "gradient_boosting_xgb_equivalent"
+        }
+      },
+      "climate_risk_score": 37.84,
+      "risk_level": "Low",
+      "weights": {
+        "heat": 0.25,
+        "flood": 0.3,
+        "air_quality": 0.2,
+        "water_stress": 0.25
+      },
+      "data_coverage": 100.0,
+      "input_feature_coverage_pct": 57.14,
+      "explainability": {},
+      "what_if": {},
+      "recommendations": [
+        {
+          "hazard": "heat",
+          "priority": "High",
+          "action": "Issue outdoor worker heat-hydration advisory between 12:00\u201316:00 and activate urban cooling shelters."
+        }
+      ]
+    },
+    "Nagpur": {
+      "location": "Nagpur",
+      "timestamp": "2026-06-18T12:00:00",
+      "data_status": "available",
+      "risks": {
+        "heat": 77.16,
+        "flood": 7.13,
+        "air_quality": 28.31,
+        "water_stress": 10.66
+      },
+      "hazard_details": {
+        "heat": {
+          "heat_risk": 77.16,
+          "risk_level": "High",
+          "confidence": 0.85,
+          "contributing_factors": [
+            "heat_index_c",
+            "temp_anomaly_c",
+            "temp_max_anomaly_c",
+            "temp_max_c"
+          ],
+          "model_used": "gradient_boosting_xgb_equivalent",
+          "methodology_note": "Meteorological heat-hazard proxy (0-100) calibrated on NOAA Heat Index, Wet-Bulb temperature, and IMD thermal anomalies."
+        },
+        "flood": {
+          "flood_risk": 7.13,
+          "risk_level": "Very Low",
+          "confidence": 0.89,
+          "contributing_factors": [
+            "runoff_potential_index",
+            "rainfall_mm",
+            "rainfall_anomaly_mm",
+            "soil_moisture"
+          ],
+          "forecast_next_24h_rainfall_mm": 24.8,
+          "is_proxy_hazard": true,
+          "data_availability": {
+            "soil_moisture_measured": false,
+            "elevation_available": true,
+            "historical_flood_polygon_labels_available": false
+          },
+          "limitations": "High rainfall does not automatically mean flooding. Output is a hydrometeorological rainfall-runoff flood-hazard proxy; real-time dam release and street stormwater blockage data are not included.",
+          "model_used": "gradient_boosting_xgb_equivalent"
+        },
+        "air_quality": {
+          "air_quality_risk": 28.31,
+          "risk_level": "Low",
+          "confidence": 0.69,
+          "dominant_pollutants": [
+            "PM2.5",
+            "CO",
+            "O3"
+          ],
+          "cpcb_calculated_aqi": 114.2,
+          "source_measured_aqi": null,
+          "aqi_source_distinction": "ml_hazard_and_cpcb_subindex_calculated_from_pollutants",
+          "model_used": "gradient_boosting_xgb_equivalent"
+        },
+        "water_stress": {
+          "water_stress_risk": 10.66,
+          "risk_level": "Very Low",
+          "confidence": 0.78,
+          "contributing_factors": [
+            "soil_moisture_rolling_7d_mean",
+            "hydro_water_deficit_30d_mm",
+            "rainfall_rolling_14d_sum",
+            "soil_moisture"
+          ],
+          "data_status_notes": [
+            "Direct soil_moisture measurement unavailable; estimated via antecedent precipitation-humidity proxy.",
+            "Direct evapotranspiration_mm unavailable; estimated via Hargreaves temperature-radiation formula."
+          ],
+          "scope_disclaimer": "Represents environmental/climatic water stress only. Municipal reservoir levels, groundwater depth, and piped water supply are not measured.",
+          "model_used": "gradient_boosting_xgb_equivalent"
+        }
+      },
+      "climate_risk_score": 29.76,
+      "risk_level": "Low",
+      "weights": {
+        "heat": 0.25,
+        "flood": 0.3,
+        "air_quality": 0.2,
+        "water_stress": 0.25
+      },
+      "data_coverage": 100.0,
+      "input_feature_coverage_pct": 57.14,
+      "explainability": {},
+      "what_if": {},
+      "recommendations": [
+        {
+          "hazard": "heat",
+          "priority": "High",
+          "action": "Issue outdoor worker heat-hydration advisory between 12:00\u201316:00 and activate urban cooling shelters."
+        }
+      ]
+    }
+  },
+  "missing_hazard_policy": {
+    "climate_risk_score": 65.57,
+    "risk_level": "High",
+    "hazard_breakdown": {
+      "heat": 74.0,
+      "flood": null,
+      "air_quality": 52.0,
+      "water_stress": 68.0
+    },
+    "weights": {
+      "heat": 0.25,
+      "flood": 0.3,
+      "air_quality": 0.2,
+      "water_stress": 0.25
+    },
+    "effective_weights": {
+      "heat": 0.3571,
+      "flood": 0.0,
+      "air_quality": 0.2857,
+      "water_stress": 0.3572
+    },
+    "data_coverage": 75.0,
+    "missing_hazards": [
+      "flood"
+    ],
+    "calculation_explanation": "Climate Risk Score = (heat: 74.00 \u00d7 0.36) + (air_quality: 52.00 \u00d7 0.29) + (water_stress: 68.00 \u00d7 0.36) = 65.57. Missing hazards ['flood'] were excluded (not set to zero); weights were proportionally re-normalized across available hazards ['heat', 'air_quality', 'water_stress'].",
+    "methodology_disclaimer": "Weighted multi-hazard decision-support composite score (illustrative starting weights). Not an officially recognized WMO or IMD climate index."
+  }
+}

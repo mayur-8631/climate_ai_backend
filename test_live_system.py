@@ -132,8 +132,37 @@ def run_tests():
     print(f"Disclaimer:      {sim_data['disclaimer']}")
     assert res.status_code == 200
 
+    # 10. Full ML Intelligence Engine (/api/v1/predict/intelligence)
+    print_separator("10. UNIFIED ML INTELLIGENCE ENGINE (/api/v1/predict/intelligence)")
+    intel_payload = {
+        "environmental_data": {
+            "location": "Pune",
+            "timestamp": "2026-07-18T12:00:00",
+            "temperature_c": 31.0,
+            "temp_max_c": 35.2,
+            "temp_min_c": 23.0,
+            "humidity_pct": 78.0,
+            "wind_speed_kmh": 12.0,
+            "rainfall_mm": 64.0,
+            "rainfall_intensity_mm_hr": 19.0,
+            "soil_moisture": 0.72,
+            "pm25_ugm3": 42.0,
+            "pm10_ugm3": 88.0,
+        },
+        "scenario": {
+            "rainfall_change_percent": 30.0,
+        },
+    }
+    res = client.post("/api/v1/predict/intelligence", json=intel_payload)
+    print(f"Status Code: {res.status_code}")
+    intel_data = res.json()
+    print(f"Composite Climate Risk Score: {intel_data['climate_risk_score']} ({intel_data['risk_level']})")
+    print(f"Risks: {intel_data['risks']}")
+    print(f"What-If Delta: {intel_data['what_if']['change']:+.2f} pts ({intel_data['what_if']['change_percentage']:+.2f}%)")
+    assert res.status_code == 200
+
     print("\n" + "=" * 65)
-    print(" ALL BACKEND SUBSYSTEM TESTS COMPLETED SUCCESSFULLY! ")
+    print(" ALL BACKEND & ML SUBSYSTEM TESTS COMPLETED SUCCESSFULLY! ")
     print("=" * 65 + "\n")
 
 if __name__ == "__main__":

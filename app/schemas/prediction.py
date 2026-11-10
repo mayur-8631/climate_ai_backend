@@ -1,6 +1,6 @@
 from typing import Dict, Optional
 from datetime import datetime
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class HazardDetail(BaseModel):
@@ -27,6 +27,8 @@ class PredictionRequest(BaseModel):
 
 
 class PredictionResponse(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
+
     location: str
     ward: Optional[str] = None
     evaluated_at: datetime
